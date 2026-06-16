@@ -3,478 +3,356 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VideoLink — Convert Video ke URL</title>
+<title>VideoLink — Upload Video ke URL</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --purple: #7F77DD; --purple-light: #EEEDFE; --purple-dark: #3C3489;
-    --teal: #1D9E75; --teal-light: #E1F5EE;
-    --gray: #888780; --gray-light: #F1EFE8;
-    --text: #2C2C2A; --text-muted: #5F5E5A;
-    --border: rgba(0,0,0,0.12); --radius: 12px;
-  }
-  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f8f7ff; min-height: 100vh; color: var(--text); }
-  header { background: white; border-bottom: 1px solid var(--border); padding: 1rem 2rem; display: flex; align-items: center; gap: 10px; }
-  .logo-icon { width: 36px; height: 36px; background: var(--purple); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
-  .logo-icon svg { fill: white; }
-  header h1 { font-size: 1.2rem; font-weight: 700; color: var(--purple-dark); }
-  header span { font-size: 0.78rem; color: var(--gray); margin-left: 8px; }
-  main { max-width: 700px; margin: 2.5rem auto; padding: 0 1.5rem; }
-  .hero { text-align: center; margin-bottom: 2rem; }
-  .hero h2 { font-size: 1.9rem; font-weight: 800; color: var(--purple-dark); line-height: 1.2; margin-bottom: 0.6rem; }
-  .hero p { font-size: 0.95rem; color: var(--text-muted); }
-  .badge { display: inline-block; background: var(--teal-light); color: var(--teal); font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-bottom: 1rem; text-transform: uppercase; }
-  .card { background: white; border-radius: var(--radius); border: 1px solid var(--border); padding: 2rem; box-shadow: 0 2px 16px rgba(127,119,221,0.07); }
-  .upload-zone { border: 2px dashed #c5c1f5; border-radius: 10px; padding: 2.5rem 1.5rem; text-align: center; cursor: pointer; transition: all 0.2s; position: relative; background: var(--purple-light); }
-  .upload-zone:hover, .upload-zone.drag-over { border-color: var(--purple); background: #e4e2fb; }
-  .upload-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-  .upload-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
-  .upload-zone h3 { font-size: 1rem; font-weight: 600; color: var(--purple-dark); margin-bottom: 0.4rem; }
-  .upload-zone p { font-size: 0.82rem; color: var(--text-muted); }
-  .formats { margin-top: 0.75rem; display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
-  .format-tag { background: white; border: 1px solid #c5c1f5; color: var(--purple); font-size: 0.7rem; padding: 2px 8px; border-radius: 20px; }
-  .file-preview { display: none; margin: 1rem 0; padding: 0.75rem 1rem; background: white; border: 1px solid #c5c1f5; border-radius: 8px; align-items: center; gap: 10px; }
-  .file-preview.show { display: flex; }
-  .file-info { flex: 1; min-width: 0; }
-  .file-name { font-weight: 600; font-size: 0.85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .file-size { font-size: 0.75rem; color: var(--gray); margin-top: 2px; }
-  .btn-remove { background: none; border: none; cursor: pointer; color: var(--gray); font-size: 1.1rem; padding: 2px 6px; }
-  .section-label { font-size: 0.82rem; font-weight: 600; color: var(--text-muted); margin: 1.25rem 0 0.6rem; display: block; }
-  .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.1rem; }
-  .service-btn { padding: 0.85rem; border: 1.5px solid var(--border); border-radius: 10px; background: white; cursor: pointer; transition: all 0.15s; display: flex; flex-direction: column; gap: 4px; text-align: left; }
-  .service-btn:hover { border-color: var(--purple); background: #faf9ff; }
-  .service-btn.active { border-color: var(--purple); background: var(--purple-light); }
-  .svc-top { display: flex; align-items: center; justify-content: space-between; gap: 4px; }
-  .svc-name { font-weight: 700; font-size: 0.88rem; color: var(--text); }
-  .svc-badge { font-size: 0.6rem; font-weight: 700; padding: 2px 6px; border-radius: 8px; white-space: nowrap; }
-  .badge-unlimited { background: #E1F5EE; color: #0F6E56; }
-  .badge-large { background: #EEEDFE; color: #3C3489; }
-  .badge-permanent { background: #fff3cd; color: #7a5c00; }
-  .svc-detail { font-size: 0.7rem; color: var(--gray); line-height: 1.4; }
-  .service-btn.active .svc-name { color: var(--purple-dark); }
-  .service-btn.active .svc-detail { color: var(--purple); }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0efff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+h1 { color: #3C3489; font-size: 1.8rem; margin-bottom: 0.3rem; }
+.sub { color: #888; font-size: 0.9rem; margin-bottom: 2rem; }
 
-  /* Archive key input */
-  .archive-key-box { display: none; background: #fff8e1; border: 1px solid #ffe082; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
-  .archive-key-box.show { display: block; }
-  .archive-key-box p { font-size: 0.78rem; color: #7a5c00; margin-bottom: 8px; line-height: 1.5; }
-  .archive-key-box a { color: #185FA5; }
-  .key-row { display: flex; gap: 8px; margin-bottom: 6px; }
-  .key-row input { flex: 1; padding: 0.5rem 0.7rem; border: 1px solid #ffe082; border-radius: 6px; font-size: 0.82rem; outline: none; background: white; }
-  .key-row input:focus { border-color: #ffc107; }
+.box {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 4px 24px rgba(127,119,221,0.12);
+}
 
-  .info-box { padding: 0.7rem 1rem; border-radius: 8px; font-size: 0.8rem; line-height: 1.5; margin-bottom: 1.1rem; }
-  .info-box.green { background: var(--teal-light); border: 1px solid #9FE1CB; color: #085041; }
-  .info-box.blue { background: #EBF4FF; border: 1px solid #B5D4F4; color: #0C447C; }
-  .info-box.amber { background: #fff8e1; border: 1px solid #ffe082; color: #7a5c00; }
+.dropzone {
+  border: 2px dashed #b0aaee;
+  border-radius: 12px;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  background: #f5f4ff;
+  transition: all 0.2s;
+  position: relative;
+  margin-bottom: 1.25rem;
+}
+.dropzone:hover, .dropzone.over { border-color: #7F77DD; background: #eceaff; }
+.dropzone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+.dropzone .icon { font-size: 2.8rem; margin-bottom: 0.5rem; }
+.dropzone p { color: #555; font-size: 0.9rem; }
+.dropzone .hint { font-size: 0.75rem; color: #aaa; margin-top: 0.3rem; }
 
-  .btn-upload { width: 100%; padding: 0.95rem; background: var(--purple); color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 8px; }
-  .btn-upload:hover { background: var(--purple-dark); }
-  .btn-upload:disabled { background: #b9b7e9; cursor: not-allowed; }
-  .progress-wrap { display: none; margin-top: 1.25rem; }
-  .progress-wrap.show { display: block; }
-  .progress-info { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; }
-  .progress-bar-bg { background: #e4e2fb; border-radius: 20px; height: 10px; overflow: hidden; }
-  .progress-bar { height: 100%; background: linear-gradient(90deg, var(--purple), var(--teal)); border-radius: 20px; width: 0%; transition: width 0.3s; }
-  .progress-speed { font-size: 0.75rem; color: var(--gray); margin-top: 4px; }
-  .result-box { display: none; margin-top: 1.5rem; padding: 1.25rem; background: var(--teal-light); border-radius: 10px; border: 1px solid #9FE1CB; }
-  .result-box.show { display: block; }
-  .result-title { font-size: 0.85rem; font-weight: 600; color: var(--teal); margin-bottom: 0.75rem; }
-  .url-row { display: flex; gap: 8px; margin-bottom: 0.6rem; }
-  .url-row input { flex: 1; padding: 0.6rem 0.75rem; border: 1px solid #9FE1CB; border-radius: 6px; font-size: 0.83rem; background: white; color: var(--text); outline: none; }
-  .btn-copy { padding: 0.6rem 1rem; background: var(--teal); color: white; border: none; border-radius: 6px; font-size: 0.82rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
-  .btn-copy:hover { background: #0F6E56; }
-  .result-meta { font-size: 0.75rem; color: #085041; display: flex; gap: 1rem; flex-wrap: wrap; }
-  .error-box { display: none; margin-top: 1rem; padding: 1rem; background: #FCEBEB; border: 1px solid #F7C1C1; border-radius: 8px; font-size: 0.82rem; color: #A32D2D; line-height: 1.7; }
-  .error-box.show { display: block; }
-  .history-section { margin-top: 2rem; }
-  .history-title { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.75rem; }
-  .history-list { list-style: none; }
-  .history-item { display: flex; align-items: center; padding: 0.6rem 0.75rem; border-radius: 7px; gap: 10px; font-size: 0.8rem; border: 1px solid var(--border); background: white; margin-bottom: 6px; }
-  .h-name { flex: 1; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .h-url { color: var(--purple); text-decoration: none; font-size: 0.75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px; }
-  .h-url:hover { text-decoration: underline; }
-  .h-time { color: var(--gray); font-size: 0.72rem; white-space: nowrap; }
-  .btn-sm { background: none; border: 1px solid #c5c1f5; color: var(--purple); font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; cursor: pointer; }
-  footer { text-align: center; padding: 2rem 1rem; font-size: 0.75rem; color: var(--gray); }
+.file-info {
+  display: none;
+  background: #f5f4ff;
+  border: 1px solid #c5c1f5;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.85rem;
+  align-items: center;
+  gap: 10px;
+}
+.file-info.show { display: flex; }
+.file-info .name { flex: 1; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #3C3489; }
+.file-info .size { color: #888; font-size: 0.78rem; white-space: nowrap; }
+.file-info button { background: none; border: none; cursor: pointer; color: #aaa; font-size: 1rem; padding: 0 4px; }
+
+.btn {
+  width: 100%;
+  padding: 0.9rem;
+  background: #7F77DD;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn:hover { background: #3C3489; }
+.btn:disabled { background: #c5c1f5; cursor: not-allowed; }
+
+.progress { display: none; margin-top: 1.25rem; }
+.progress.show { display: block; }
+.progress-text { display: flex; justify-content: space-between; font-size: 0.8rem; color: #666; margin-bottom: 6px; }
+.bar-bg { background: #e8e6ff; border-radius: 99px; height: 10px; overflow: hidden; }
+.bar { height: 100%; background: linear-gradient(90deg, #7F77DD, #1D9E75); border-radius: 99px; width: 0%; transition: width 0.3s ease; }
+.speed-txt { font-size: 0.73rem; color: #aaa; margin-top: 4px; }
+
+.result { display: none; margin-top: 1.25rem; background: #e8f8f2; border: 1px solid #9FE1CB; border-radius: 10px; padding: 1.1rem; }
+.result.show { display: block; }
+.result label { font-size: 0.78rem; font-weight: 700; color: #0F6E56; display: block; margin-bottom: 6px; }
+.result-row { display: flex; gap: 8px; }
+.result-row input { flex: 1; padding: 0.55rem 0.75rem; border: 1px solid #9FE1CB; border-radius: 7px; font-size: 0.82rem; background: white; color: #2C2C2A; outline: none; }
+.result-row .copy-btn { padding: 0.55rem 1rem; background: #1D9E75; color: white; border: none; border-radius: 7px; font-size: 0.82rem; font-weight: 700; cursor: pointer; white-space: nowrap; }
+.result-row .copy-btn:hover { background: #0F6E56; }
+.result-meta { font-size: 0.72rem; color: #0F6E56; margin-top: 6px; }
+
+.error { display: none; margin-top: 1rem; background: #fff0f0; border: 1px solid #ffbaba; border-radius: 8px; padding: 0.85rem 1rem; font-size: 0.82rem; color: #c0392b; line-height: 1.6; }
+.error.show { display: block; }
+
+.note {
+  margin-top: 1.5rem;
+  background: #fff8e1;
+  border: 1px solid #ffe082;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.78rem;
+  color: #7a5c00;
+  line-height: 1.6;
+}
+
+.history { margin-top: 1.5rem; }
+.history h3 { font-size: 0.82rem; font-weight: 700; color: #888; margin-bottom: 0.6rem; }
+.history ul { list-style: none; }
+.history li {
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+}
+.history li .hname { flex: 1; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #3C3489; }
+.history li a { color: #7F77DD; text-decoration: none; font-size: 0.72rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 160px; display: block; }
+.history li a:hover { text-decoration: underline; }
+.history li .hcopy { background: none; border: 1px solid #c5c1f5; color: #7F77DD; font-size: 0.68rem; padding: 2px 7px; border-radius: 4px; cursor: pointer; white-space: nowrap; }
 </style>
 </head>
 <body>
-<header>
-  <div class="logo-icon">
-    <svg width="20" height="20" viewBox="0 0 24 24"><path d="M15 10l4.553-2.277A1 1 0 0 1 21 8.6v6.8a1 1 0 0 1-1.447.877L15 14M3 8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"/></svg>
+
+<h1>🎬 VideoLink</h1>
+<p class="sub">Upload video → dapatkan URL langsung via catbox.moe</p>
+
+<div class="box">
+
+  <!-- Drop zone -->
+  <div class="dropzone" id="dz">
+    <input type="file" id="fi" accept="video/*">
+    <div class="icon">📁</div>
+    <p>Klik atau seret video ke sini</p>
+    <p class="hint">MP4 · MKV · AVI · MOV · WEBM · FLV · WMV — maks 200 MB</p>
   </div>
-  <h1>VideoLink</h1>
-  <span>Upload video → dapatkan URL langsung</span>
-</header>
 
-<main>
-  <div class="hero">
-    <div class="badge">✓ Tanpa Login · Pilih Layanan Sesuai Kebutuhan</div>
-    <h2>Upload Video,<br>Dapatkan Link Langsung</h2>
-    <p>Pilih layanan sesuai kebutuhan — sementara atau permanen selamanya.</p>
+  <!-- File info -->
+  <div class="file-info" id="fi-info">
+    <span>🎥</span>
+    <span class="name" id="fi-name"></span>
+    <span class="size" id="fi-size"></span>
+    <button id="fi-remove" title="Hapus">✕</button>
   </div>
 
-  <div class="card">
-    <div class="upload-zone" id="dropZone">
-      <input type="file" id="fileInput" accept="video/*,*/*">
-      <div class="upload-icon">🎬</div>
-      <h3>Seret video ke sini atau klik untuk pilih file</h3>
-      <p>Semua format & ukuran didukung</p>
-      <div class="formats">
-        <span class="format-tag">MP4</span><span class="format-tag">MKV</span><span class="format-tag">AVI</span>
-        <span class="format-tag">MOV</span><span class="format-tag">WEBM</span><span class="format-tag">FLV</span><span class="format-tag">WMV</span>
-      </div>
+  <!-- Upload button -->
+  <button class="btn" id="upbtn" disabled>⬆ Upload & Dapatkan Link</button>
+
+  <!-- Progress -->
+  <div class="progress" id="prog">
+    <div class="progress-text">
+      <span id="prog-label">Mengupload...</span>
+      <span id="prog-pct">0%</span>
     </div>
-
-    <div class="file-preview" id="filePreview">
-      <span style="font-size:1.5rem">🎥</span>
-      <div class="file-info">
-        <div class="file-name" id="fileName">—</div>
-        <div class="file-size" id="fileSize">—</div>
-      </div>
-      <button class="btn-remove" id="removeFile">✕</button>
-    </div>
-
-    <span class="section-label">Pilih layanan upload:</span>
-    <div class="service-grid" id="serviceGrid">
-
-      <button class="service-btn active" data-service="gofile">
-        <div class="svc-top">
-          <span class="svc-name">gofile.io</span>
-          <span class="svc-badge badge-unlimited">∞ Tak Terbatas</span>
-        </div>
-        <span class="svc-detail">Gratis · Hapus jika 10 hari tak aktif</span>
-      </button>
-
-      <button class="service-btn" data-service="catbox">
-        <div class="svc-top">
-          <span class="svc-name">catbox.moe</span>
-          <span class="svc-badge badge-large">200 MB</span>
-        </div>
-        <span class="svc-detail">Gratis · Permanen · Stabil</span>
-      </button>
-
-      <button class="service-btn" data-service="archive">
-        <div class="svc-top">
-          <span class="svc-name">Internet Archive</span>
-          <span class="svc-badge badge-permanent">∞ Permanen</span>
-        </div>
-        <span class="svc-detail">Gratis · Simpan selamanya · Butuh API key gratis</span>
-      </button>
-
-    </div>
-
-    <!-- Internet Archive key input -->
-    <div class="archive-key-box" id="archiveKeyBox">
-      <p>
-        🏛️ <strong>Internet Archive</strong> menyimpan file Anda <strong>selamanya secara gratis</strong> tanpa batas ukuran.<br>
-        Butuh API key gratis (1 menit setup):
-        <a href="https://archive.org/account/s3.php" target="_blank">archive.org/account/s3.php</a>
-        → Login/daftar gratis → Copy <strong>Access Key</strong> & <strong>Secret Key</strong>
-      </p>
-      <div class="key-row">
-        <input type="text" id="archiveAccessKey" placeholder="Access Key (contoh: ABCdef123456...)">
-      </div>
-      <div class="key-row">
-        <input type="password" id="archiveSecretKey" placeholder="Secret Key (contoh: xYz789...)">
-      </div>
-    </div>
-
-    <div class="info-box green" id="infoBox">
-      🚀 <strong>gofile.io</strong> — Tidak ada batas ukuran. Gratis tanpa login. File terhapus otomatis jika 10 hari tidak diakses.
-    </div>
-
-    <button class="btn-upload" id="uploadBtn" disabled>⬆ Upload &amp; Generate Link</button>
-
-    <div class="progress-wrap" id="progressWrap">
-      <div class="progress-info">
-        <span id="progressLabel">Mengupload...</span>
-        <span id="progressPct">0%</span>
-      </div>
-      <div class="progress-bar-bg"><div class="progress-bar" id="progressBar"></div></div>
-      <div class="progress-speed" id="progressSpeed"></div>
-    </div>
-
-    <div class="error-box" id="errorBox"></div>
-
-    <div class="result-box" id="resultBox">
-      <div class="result-title">✅ Link berhasil dibuat!</div>
-      <div class="url-row">
-        <input type="text" id="resultUrl" readonly>
-        <button class="btn-copy" id="copyBtn">Salin Link</button>
-      </div>
-      <div class="result-meta" id="resultMeta"></div>
-    </div>
-
-    <div class="history-section" id="historySection" style="display:none;">
-      <div class="history-title">🕑 Riwayat Upload Sesi Ini</div>
-      <ul class="history-list" id="historyList"></ul>
-    </div>
+    <div class="bar-bg"><div class="bar" id="bar"></div></div>
+    <div class="speed-txt" id="speed-txt"></div>
   </div>
-</main>
 
-<footer>File dikirim langsung dari browser ke layanan pihak ketiga. Tidak ada data melewati server kami.</footer>
+  <!-- Error -->
+  <div class="error" id="err"></div>
+
+  <!-- Result -->
+  <div class="result" id="res">
+    <label>✅ Link berhasil dibuat!</label>
+    <div class="result-row">
+      <input type="text" id="res-url" readonly>
+      <button class="copy-btn" id="copy-btn">Salin</button>
+    </div>
+    <div class="result-meta" id="res-meta"></div>
+  </div>
+
+  <!-- Note -->
+  <div class="note">
+    ℹ️ Layanan: <strong>catbox.moe</strong> — file disimpan <strong>permanen gratis</strong>.<br>
+    ⚠️ Situs ini harus dibuka via <strong>GitHub Pages / Netlify</strong> agar upload bisa berjalan (bukan dari folder lokal).
+  </div>
+
+</div>
+
+<!-- History -->
+<div class="history" id="hist" style="display:none; width:100%; max-width:520px;">
+  <h3>🕑 Riwayat Upload</h3>
+  <ul id="hist-list"></ul>
+</div>
 
 <script>
-const fileInput   = document.getElementById('fileInput');
-const dropZone    = document.getElementById('dropZone');
-const filePreview = document.getElementById('filePreview');
-const fileNameEl  = document.getElementById('fileName');
-const fileSizeEl  = document.getElementById('fileSize');
-const removeFileBtn = document.getElementById('removeFile');
-const uploadBtn   = document.getElementById('uploadBtn');
-const progressWrap = document.getElementById('progressWrap');
-const progressBar  = document.getElementById('progressBar');
-const progressLabel = document.getElementById('progressLabel');
-const progressPct  = document.getElementById('progressPct');
-const progressSpeed = document.getElementById('progressSpeed');
-const errorBox    = document.getElementById('errorBox');
-const resultBox   = document.getElementById('resultBox');
-const resultUrl   = document.getElementById('resultUrl');
-const copyBtn     = document.getElementById('copyBtn');
-const resultMeta  = document.getElementById('resultMeta');
-const historySection = document.getElementById('historySection');
-const historyList = document.getElementById('historyList');
-const infoBox     = document.getElementById('infoBox');
-const archiveKeyBox = document.getElementById('archiveKeyBox');
+(function(){
+  const dz       = document.getElementById('dz');
+  const fi       = document.getElementById('fi');
+  const fiInfo   = document.getElementById('fi-info');
+  const fiName   = document.getElementById('fi-name');
+  const fiSize   = document.getElementById('fi-size');
+  const fiRemove = document.getElementById('fi-remove');
+  const upbtn    = document.getElementById('upbtn');
+  const prog     = document.getElementById('prog');
+  const bar      = document.getElementById('bar');
+  const progLabel= document.getElementById('prog-label');
+  const progPct  = document.getElementById('prog-pct');
+  const speedTxt = document.getElementById('speed-txt');
+  const err      = document.getElementById('err');
+  const res      = document.getElementById('res');
+  const resUrl   = document.getElementById('res-url');
+  const copyBtn  = document.getElementById('copy-btn');
+  const resMeta  = document.getElementById('res-meta');
+  const hist     = document.getElementById('hist');
+  const histList = document.getElementById('hist-list');
 
-let selectedFile = null;
-let selectedService = 'gofile';
-let uploadHistory = [];
-let uploadStart = 0, lastLoaded = 0, lastSpeedTime = 0;
+  let file = null;
+  let history = [];
+  let t0 = 0, lastBytes = 0, lastT = 0;
 
-const serviceData = {
-  gofile:     { label: 'gofile.io',          cls: 'green', info: '🚀 <strong>gofile.io</strong> — Tidak ada batas ukuran. Gratis tanpa login. File terhapus otomatis jika 10 hari tidak diakses.' },
-  catbox:     { label: 'catbox.moe',          cls: 'green',  info: '📦 <strong>catbox.moe</strong> — Maks 200 MB. Simpan permanen. Paling stabil & cepat.' },
-  archive:    { label: 'Internet Archive',    cls: 'amber', info: '🏛️ <strong>Internet Archive</strong> — File disimpan <strong>selamanya</strong>, tidak ada batas ukuran. Butuh API key gratis dari archive.org.' }
-};
+  function fmt(b){
+    if(b<1024) return b+'B';
+    if(b<1048576) return (b/1024).toFixed(1)+'KB';
+    if(b<1073741824) return (b/1048576).toFixed(1)+'MB';
+    return (b/1073741824).toFixed(2)+'GB';
+  }
 
-function formatSize(b) {
-  if (b < 1024) return b + ' B';
-  if (b < 1048576) return (b/1024).toFixed(1) + ' KB';
-  if (b < 1073741824) return (b/1048576).toFixed(1) + ' MB';
-  return (b/1073741824).toFixed(2) + ' GB';
-}
+  function setFile(f){
+    file = f;
+    fiName.textContent = f.name;
+    fiSize.textContent = fmt(f.size);
+    fiInfo.classList.add('show');
+    upbtn.disabled = false;
+    hideErr();
+    res.classList.remove('show');
+    prog.classList.remove('show');
+  }
 
-function setFile(f) {
-  selectedFile = f;
-  fileNameEl.textContent = f.name;
-  fileSizeEl.textContent = formatSize(f.size);
-  filePreview.classList.add('show');
-  uploadBtn.disabled = false;
-  hideError();
-  resultBox.classList.remove('show');
-  progressWrap.classList.remove('show');
-}
+  function clearFile(){
+    file = null;
+    fi.value = '';
+    fiInfo.classList.remove('show');
+    upbtn.disabled = true;
+  }
 
-fileInput.addEventListener('change', e => { if (e.target.files[0]) setFile(e.target.files[0]); });
-dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
-dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
-dropZone.addEventListener('drop', e => {
-  e.preventDefault(); dropZone.classList.remove('drag-over');
-  if (e.dataTransfer.files[0]) setFile(e.dataTransfer.files[0]);
-});
-removeFileBtn.addEventListener('click', () => {
-  selectedFile = null; fileInput.value = '';
-  filePreview.classList.remove('show'); uploadBtn.disabled = true;
-  resultBox.classList.remove('show'); hideError(); progressWrap.classList.remove('show');
-});
+  function showErr(msg){ err.innerHTML = msg; err.classList.add('show'); }
+  function hideErr(){ err.classList.remove('show'); }
 
-document.getElementById('serviceGrid').querySelectorAll('.service-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.getElementById('serviceGrid').querySelectorAll('.service-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    selectedService = btn.dataset.service;
-    const d = serviceData[selectedService];
-    infoBox.className = 'info-box ' + d.cls;
-    infoBox.innerHTML = d.info;
-    archiveKeyBox.classList.toggle('show', selectedService === 'archive');
+  fi.addEventListener('change', e => { if(e.target.files[0]) setFile(e.target.files[0]); });
+  dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('over'); });
+  dz.addEventListener('dragleave', () => dz.classList.remove('over'));
+  dz.addEventListener('drop', e => {
+    e.preventDefault(); dz.classList.remove('over');
+    if(e.dataTransfer.files[0]) setFile(e.dataTransfer.files[0]);
   });
-});
+  fiRemove.addEventListener('click', clearFile);
 
-function showError(msg) { errorBox.innerHTML = msg; errorBox.classList.add('show'); }
-function hideError() { errorBox.classList.remove('show'); }
+  upbtn.addEventListener('click', () => { if(file) upload(); });
 
-uploadBtn.addEventListener('click', () => { if (selectedFile) doUpload(); });
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(resUrl.value).then(() => {
+      copyBtn.textContent = '✓ OK!';
+      setTimeout(() => copyBtn.textContent = 'Salin', 2000);
+    });
+  });
 
-async function doUpload() {
-  uploadBtn.disabled = true;
-  hideError();
-  resultBox.classList.remove('show');
-  progressWrap.classList.add('show');
-  progressBar.style.width = '0%';
-  progressPct.textContent = '0%';
-  progressSpeed.textContent = '';
-  uploadStart = Date.now();
-  lastLoaded = 0; lastSpeedTime = Date.now();
+  function upload(){
+    upbtn.disabled = true;
+    hideErr();
+    res.classList.remove('show');
+    prog.classList.add('show');
+    bar.style.width = '0%';
+    progPct.textContent = '0%';
+    speedTxt.textContent = '';
+    progLabel.textContent = 'Menyiapkan...';
+    t0 = Date.now(); lastBytes = 0; lastT = Date.now();
 
-  try {
-    let link = '';
+    const fd = new FormData();
+    fd.append('reqtype', 'fileupload');
+    fd.append('userhash', '');
+    fd.append('fileToUpload', file);
 
-    if (selectedService === 'gofile') {
-      progressLabel.textContent = 'Mencari server gofile.io...';
-      let server = 'store1';
-      try {
-        const r = await fetch('https://api.gofile.io/servers');
-        const j = await r.json();
-        if (j.status === 'ok' && j.data.servers.length > 0) server = j.data.servers[0].name;
-      } catch(e) {}
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://catbox.moe/user/api.php');
 
-      progressLabel.textContent = 'Mengupload ke gofile.io...';
-      const fd = new FormData();
-      fd.append('file', selectedFile);
-      const raw = await xhrUpload(`https://${server}.gofile.io/uploadFile`, fd);
-      const json = JSON.parse(raw);
-      if (json.status !== 'ok') throw new Error('gofile gagal: ' + (json.message || raw.substring(0,100)));
-      link = `https://gofile.io/d/${json.data.code}`;
-
-    } else if (selectedService === 'catbox') {
-      progressLabel.textContent = 'Mengupload ke catbox.moe...';
-      const fd = new FormData();
-      fd.append('reqtype', 'fileupload');
-      fd.append('userhash', '');
-      fd.append('fileToUpload', selectedFile);
-      const raw = await xhrUpload('https://catbox.moe/user/api.php', fd);
-      link = raw.trim();
-      if (!link.startsWith('http')) throw new Error('catbox gagal: ' + raw.substring(0,150));
-
-    } else if (selectedService === 'archive') {
-      const accessKey = document.getElementById('archiveAccessKey').value.trim();
-      const secretKey = document.getElementById('archiveSecretKey').value.trim();
-      if (!accessKey || !secretKey) {
-        throw new Error('Masukkan Access Key dan Secret Key dari archive.org terlebih dahulu.<br>Daftar gratis di: <a href="https://archive.org/account/s3.php" target="_blank">archive.org/account/s3.php</a>');
+    xhr.upload.onprogress = function(e){
+      if(!e.lengthComputable) return;
+      const pct = Math.round(e.loaded / e.total * 95);
+      bar.style.width = pct + '%';
+      progPct.textContent = pct + '%';
+      progLabel.textContent = 'Mengupload... ' + fmt(e.loaded) + ' / ' + fmt(e.total);
+      const now = Date.now();
+      const dt = (now - lastT) / 1000;
+      if(dt >= 1){
+        speedTxt.textContent = 'Kecepatan: ' + fmt((e.loaded - lastBytes) / dt) + '/s';
+        lastBytes = e.loaded; lastT = now;
       }
-
-      // Generate unique identifier
-      const identifier = 'videolink-' + Date.now() + '-' + Math.random().toString(36).substring(2,8);
-      const filename = selectedFile.name;
-      const uploadUrl = `https://s3.us.archive.org/${identifier}/${encodeURIComponent(filename)}`;
-
-      progressLabel.textContent = 'Mengupload ke Internet Archive...';
-
-      const raw = await xhrUploadBinaryWithHeaders(uploadUrl, selectedFile, {
-        'Authorization': `LOW ${accessKey}:${secretKey}`,
-        'x-archive-auto-make-bucket': '1',
-        'x-amz-auto-make-bucket': '1',
-        'x-archive-meta-mediatype': 'movies',
-        'x-archive-meta-subject': 'video',
-        'Content-Type': selectedFile.type || 'video/mp4'
-      });
-
-      link = `https://archive.org/details/${identifier}`;
-    }
-
-    progressBar.style.width = '100%';
-    progressPct.textContent = '100%';
-    progressLabel.textContent = 'Upload selesai! 🎉';
-    const elapsed = ((Date.now() - uploadStart) / 1000).toFixed(1);
-    const avgSpeed = formatSize(selectedFile.size / ((Date.now() - uploadStart) / 1000));
-    progressSpeed.textContent = `Selesai dalam ${elapsed}s · Rata-rata ${avgSpeed}/s`;
-
-    resultUrl.value = link;
-    resultMeta.innerHTML = `<span>📁 ${selectedFile.name}</span><span>📦 ${formatSize(selectedFile.size)}</span><span>☁️ ${serviceData[selectedService].label}</span>`;
-    resultBox.classList.add('show');
-    addHistory(selectedFile.name, link);
-
-  } catch(err) {
-    progressWrap.classList.remove('show');
-    const msg = err.message || '';
-    const isCors = msg.toLowerCase().includes('fetch') || msg.toLowerCase().includes('network') || msg === 'Failed to fetch';
-    if (isCors && selectedService !== 'archive') {
-      showError(`⚠️ <strong>Koneksi gagal</strong> — Pastikan situs ini sudah di-deploy (GitHub Pages / Netlify), bukan dibuka dari folder lokal.`);
-    } else {
-      showError('⚠️ ' + msg);
-    }
-  } finally {
-    uploadBtn.disabled = false;
-  }
-}
-
-function xhrUpload(url, formData) {
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', url);
-    xhr.upload.onprogress = trackProgress;
-    xhr.onload = () => xhr.status >= 200 && xhr.status < 300 ? resolve(xhr.responseText) : reject(new Error(`HTTP ${xhr.status}: ${xhr.responseText.substring(0,200)}`));
-    xhr.onerror = () => reject(new Error('Failed to fetch'));
-    xhr.timeout = 0;
-    xhr.send(formData);
-  });
-}
-
-function xhrUploadBinary(url, file) {
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open('PUT', url);
-    xhr.setRequestHeader('Content-Type', file.type || 'application/octet-stream');
-    xhr.upload.onprogress = trackProgress;
-    xhr.onload = () => xhr.status >= 200 && xhr.status < 300 ? resolve(xhr.responseText) : reject(new Error(`HTTP ${xhr.status}: ${xhr.responseText.substring(0,200)}`));
-    xhr.onerror = () => reject(new Error('Failed to fetch'));
-    xhr.timeout = 0;
-    xhr.send(file);
-  });
-}
-
-function xhrUploadBinaryWithHeaders(url, file, headers) {
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open('PUT', url);
-    for (const [k, v] of Object.entries(headers)) {
-      xhr.setRequestHeader(k, v);
-    }
-    xhr.upload.onprogress = trackProgress;
-    xhr.onload = () => {
-      if (xhr.status >= 200 && xhr.status < 300) resolve(xhr.responseText);
-      else reject(new Error(`HTTP ${xhr.status}: ${xhr.responseText.substring(0,300)}`));
     };
-    xhr.onerror = () => reject(new Error('Failed to fetch — pastikan API key benar dan koneksi stabil'));
+
+    xhr.onload = function(){
+      upbtn.disabled = false;
+      if(xhr.status >= 200 && xhr.status < 300){
+        const link = xhr.responseText.trim();
+        if(link.startsWith('http')){
+          bar.style.width = '100%';
+          progPct.textContent = '100%';
+          progLabel.textContent = 'Selesai!';
+          const elapsed = ((Date.now()-t0)/1000).toFixed(1);
+          speedTxt.textContent = 'Upload selesai dalam ' + elapsed + 's';
+
+          resUrl.value = link;
+          resMeta.textContent = file.name + ' · ' + fmt(file.size) + ' · catbox.moe (permanen)';
+          res.classList.add('show');
+          addHistory(file.name, link);
+        } else {
+          prog.classList.remove('show');
+          showErr('⚠️ catbox.moe menolak file ini: ' + xhr.responseText.substring(0,200));
+        }
+      } else {
+        prog.classList.remove('show');
+        showErr('⚠️ Server error ' + xhr.status + ': ' + xhr.responseText.substring(0,200));
+      }
+    };
+
+    xhr.onerror = function(){
+      upbtn.disabled = false;
+      prog.classList.remove('show');
+      showErr('⚠️ Koneksi gagal (CORS/Network).<br><br>' +
+        '✅ <strong>Pastikan situs ini dibuka via GitHub Pages atau Netlify</strong>, bukan dari folder lokal (file://).<br>' +
+        'Kalau sudah di-deploy tapi masih error, coba refresh halaman.');
+    };
+
+    xhr.ontimeout = function(){
+      upbtn.disabled = false;
+      prog.classList.remove('show');
+      showErr('⚠️ Upload timeout — koneksi terlalu lambat atau file terlalu besar.');
+    };
+
     xhr.timeout = 0;
-    xhr.send(file);
-  });
-}
-
-function trackProgress(e) {
-  if (!e.lengthComputable) return;
-  const pct = Math.round((e.loaded / e.total) * 95);
-  progressBar.style.width = pct + '%';
-  progressPct.textContent = pct + '%';
-  const now = Date.now();
-  const dt = (now - lastSpeedTime) / 1000;
-  if (dt >= 1) {
-    const spd = formatSize((e.loaded - lastLoaded) / dt);
-    progressSpeed.textContent = `Kecepatan: ${spd}/s · ${formatSize(e.loaded)} / ${formatSize(e.total)}`;
-    lastLoaded = e.loaded; lastSpeedTime = now;
+    xhr.send(fd);
   }
-  progressLabel.textContent = `Mengupload... ${formatSize(e.loaded)} / ${formatSize(e.total)}`;
-}
 
-copyBtn.addEventListener('click', () => {
-  navigator.clipboard.writeText(resultUrl.value).then(() => {
-    copyBtn.textContent = '✓ Tersalin!';
-    setTimeout(() => { copyBtn.textContent = 'Salin Link'; }, 2000);
-  });
-});
+  function addHistory(name, url){
+    const t = new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
+    history.unshift({name, url, t});
+    if(history.length > 8) history.pop();
+    histList.innerHTML = '';
+    history.forEach(h => {
+      const li = document.createElement('li');
+      li.innerHTML =
+        '<span class="hname">🎬 ' + h.name + '</span>' +
+        '<a href="' + h.url + '" target="_blank">' + h.url + '</a>' +
+        '<button class="hcopy" onclick="navigator.clipboard.writeText(\'' + h.url + '\').then(()=>{this.textContent=\'✓\';setTimeout(()=>this.textContent=\'Salin\',1500)})">Salin</button>';
+      histList.appendChild(li);
+    });
+    hist.style.display = 'block';
+  }
 
-function addHistory(name, url) {
-  const now = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-  uploadHistory.unshift({ name, url, time: now });
-  if (uploadHistory.length > 10) uploadHistory.pop();
-  historyList.innerHTML = '';
-  uploadHistory.forEach(item => {
-    const li = document.createElement('li');
-    li.className = 'history-item';
-    li.innerHTML = `<span class="h-name">🎬 ${item.name}</span><a class="h-url" href="${item.url}" target="_blank">${item.url}</a><span class="h-time">${item.time}</span><button class="btn-sm" onclick="cpUrl('${item.url}',this)">Salin</button>`;
-    historyList.appendChild(li);
-  });
-  historySection.style.display = 'block';
-}
-
-function cpUrl(url, btn) {
-  navigator.clipboard.writeText(url).then(() => {
-    btn.textContent = '✓'; setTimeout(() => { btn.textContent = 'Salin'; }, 1500);
-  });
-}
+})();
 </script>
 </body>
 </html>
