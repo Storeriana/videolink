@@ -17,7 +17,6 @@ body {
 }
 h1 { color: #3C3489; font-size: 1.8rem; margin-bottom: 0.3rem; }
 .sub { color: #888; font-size: 0.9rem; margin-bottom: 2rem; }
-
 .box {
   background: white;
   border-radius: 16px;
@@ -26,7 +25,6 @@ h1 { color: #3C3489; font-size: 1.8rem; margin-bottom: 0.3rem; }
   max-width: 520px;
   box-shadow: 0 4px 24px rgba(127,119,221,0.12);
 }
-
 .dropzone {
   border: 2px dashed #b0aaee;
   border-radius: 12px;
@@ -43,7 +41,6 @@ h1 { color: #3C3489; font-size: 1.8rem; margin-bottom: 0.3rem; }
 .dropzone .icon { font-size: 2.8rem; margin-bottom: 0.5rem; }
 .dropzone p { color: #555; font-size: 0.9rem; }
 .dropzone .hint { font-size: 0.75rem; color: #aaa; margin-top: 0.3rem; }
-
 .file-info {
   display: none;
   background: #f5f4ff;
@@ -58,7 +55,53 @@ h1 { color: #3C3489; font-size: 1.8rem; margin-bottom: 0.3rem; }
 .file-info.show { display: flex; }
 .file-info .name { flex: 1; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #3C3489; }
 .file-info .size { color: #888; font-size: 0.78rem; white-space: nowrap; }
-.file-info button { background: none; border: none; cursor: pointer; color: #aaa; font-size: 1rem; padding: 0 4px; }
+.file-info button { background: none; border: none; cursor: pointer; color: #aaa; font-size: 1rem; }
+
+/* Service tabs */
+.tabs { display: flex; gap: 6px; margin-bottom: 1rem; }
+.tab {
+  flex: 1;
+  padding: 0.6rem 0.5rem;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #888;
+  text-align: center;
+  transition: all 0.15s;
+  line-height: 1.4;
+}
+.tab:hover { border-color: #7F77DD; color: #7F77DD; }
+.tab.active { border-color: #7F77DD; background: #f0efff; color: #3C3489; }
+.tab .tab-name { display: block; font-size: 0.82rem; }
+.tab .tab-info { display: block; font-size: 0.65rem; color: inherit; opacity: 0.8; }
+
+/* Archive key fields */
+.archive-fields {
+  display: none;
+  background: #fff8e1;
+  border: 1px solid #ffe082;
+  border-radius: 8px;
+  padding: 0.85rem;
+  margin-bottom: 1rem;
+  font-size: 0.78rem;
+  color: #7a5c00;
+}
+.archive-fields.show { display: block; }
+.archive-fields p { margin-bottom: 8px; line-height: 1.5; }
+.archive-fields a { color: #185FA5; }
+.archive-fields input {
+  width: 100%;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid #ffe082;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  margin-bottom: 6px;
+  outline: none;
+  background: white;
+}
 
 .btn {
   width: 100%;
@@ -94,18 +137,7 @@ h1 { color: #3C3489; font-size: 1.8rem; margin-bottom: 0.3rem; }
 .error { display: none; margin-top: 1rem; background: #fff0f0; border: 1px solid #ffbaba; border-radius: 8px; padding: 0.85rem 1rem; font-size: 0.82rem; color: #c0392b; line-height: 1.6; }
 .error.show { display: block; }
 
-.note {
-  margin-top: 1.5rem;
-  background: #fff8e1;
-  border: 1px solid #ffe082;
-  border-radius: 8px;
-  padding: 0.75rem 1rem;
-  font-size: 0.78rem;
-  color: #7a5c00;
-  line-height: 1.6;
-}
-
-.history { margin-top: 1.5rem; }
+.history { margin-top: 1.5rem; width: 100%; max-width: 520px; }
 .history h3 { font-size: 0.82rem; font-weight: 700; color: #888; margin-bottom: 0.6rem; }
 .history ul { list-style: none; }
 .history li {
@@ -122,36 +154,51 @@ h1 { color: #3C3489; font-size: 1.8rem; margin-bottom: 0.3rem; }
 .history li .hname { flex: 1; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #3C3489; }
 .history li a { color: #7F77DD; text-decoration: none; font-size: 0.72rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 160px; display: block; }
 .history li a:hover { text-decoration: underline; }
-.history li .hcopy { background: none; border: 1px solid #c5c1f5; color: #7F77DD; font-size: 0.68rem; padding: 2px 7px; border-radius: 4px; cursor: pointer; white-space: nowrap; }
+.hcopy { background: none; border: 1px solid #c5c1f5; color: #7F77DD; font-size: 0.68rem; padding: 2px 7px; border-radius: 4px; cursor: pointer; white-space: nowrap; }
 </style>
 </head>
 <body>
 
 <h1>🎬 VideoLink</h1>
-<p class="sub">Upload video → dapatkan URL langsung via catbox.moe</p>
+<p class="sub">Upload video → dapatkan URL langsung</p>
 
 <div class="box">
 
-  <!-- Drop zone -->
   <div class="dropzone" id="dz">
     <input type="file" id="fi" accept="video/*">
     <div class="icon">📁</div>
     <p>Klik atau seret video ke sini</p>
-    <p class="hint">MP4 · MKV · AVI · MOV · WEBM · FLV · WMV — maks 200 MB</p>
+    <p class="hint">MP4 · MKV · AVI · MOV · WEBM · FLV — semua ukuran</p>
   </div>
 
-  <!-- File info -->
   <div class="file-info" id="fi-info">
     <span>🎥</span>
     <span class="name" id="fi-name"></span>
     <span class="size" id="fi-size"></span>
-    <button id="fi-remove" title="Hapus">✕</button>
+    <button id="fi-remove">✕</button>
   </div>
 
-  <!-- Upload button -->
-  <button class="btn" id="upbtn" disabled>⬆ Upload & Dapatkan Link</button>
+  <!-- Service selector -->
+  <div class="tabs" id="tabs">
+    <div class="tab active" data-svc="gofile">
+      <span class="tab-name">gofile.io</span>
+      <span class="tab-info">∞ Tak Terbatas</span>
+    </div>
+    <div class="tab" data-svc="archive">
+      <span class="tab-name">Internet Archive</span>
+      <span class="tab-info">∞ Permanen</span>
+    </div>
+  </div>
 
-  <!-- Progress -->
+  <!-- Archive key fields -->
+  <div class="archive-fields" id="arch-fields">
+    <p>🏛️ Butuh API key gratis dari <a href="https://archive.org/account/s3.php" target="_blank">archive.org/account/s3.php</a> (login → copy key)</p>
+    <input type="text" id="arch-access" placeholder="S3 Access Key (AlTTHm6t...)">
+    <input type="password" id="arch-secret" placeholder="S3 Secret Key (sAQQp2ZX...)">
+  </div>
+
+  <button class="btn" id="upbtn" disabled>⬆ Upload &amp; Dapatkan Link</button>
+
   <div class="progress" id="prog">
     <div class="progress-text">
       <span id="prog-label">Mengupload...</span>
@@ -161,10 +208,8 @@ h1 { color: #3C3489; font-size: 1.8rem; margin-bottom: 0.3rem; }
     <div class="speed-txt" id="speed-txt"></div>
   </div>
 
-  <!-- Error -->
   <div class="error" id="err"></div>
 
-  <!-- Result -->
   <div class="result" id="res">
     <label>✅ Link berhasil dibuat!</label>
     <div class="result-row">
@@ -174,45 +219,50 @@ h1 { color: #3C3489; font-size: 1.8rem; margin-bottom: 0.3rem; }
     <div class="result-meta" id="res-meta"></div>
   </div>
 
-  <!-- Note -->
-  <div class="note">
-    ℹ️ Layanan: <strong>catbox.moe</strong> — file disimpan <strong>permanen gratis</strong>.<br>
-    ⚠️ Situs ini harus dibuka via <strong>GitHub Pages / Netlify</strong> agar upload bisa berjalan (bukan dari folder lokal).
-  </div>
-
 </div>
 
-<!-- History -->
-<div class="history" id="hist" style="display:none; width:100%; max-width:520px;">
+<div class="history" id="hist" style="display:none;">
   <h3>🕑 Riwayat Upload</h3>
   <ul id="hist-list"></ul>
 </div>
 
 <script>
 (function(){
-  const dz       = document.getElementById('dz');
-  const fi       = document.getElementById('fi');
-  const fiInfo   = document.getElementById('fi-info');
-  const fiName   = document.getElementById('fi-name');
-  const fiSize   = document.getElementById('fi-size');
-  const fiRemove = document.getElementById('fi-remove');
-  const upbtn    = document.getElementById('upbtn');
-  const prog     = document.getElementById('prog');
-  const bar      = document.getElementById('bar');
-  const progLabel= document.getElementById('prog-label');
-  const progPct  = document.getElementById('prog-pct');
-  const speedTxt = document.getElementById('speed-txt');
-  const err      = document.getElementById('err');
-  const res      = document.getElementById('res');
-  const resUrl   = document.getElementById('res-url');
-  const copyBtn  = document.getElementById('copy-btn');
-  const resMeta  = document.getElementById('res-meta');
-  const hist     = document.getElementById('hist');
-  const histList = document.getElementById('hist-list');
+  var dz        = document.getElementById('dz');
+  var fi        = document.getElementById('fi');
+  var fiInfo    = document.getElementById('fi-info');
+  var fiName    = document.getElementById('fi-name');
+  var fiSize    = document.getElementById('fi-size');
+  var fiRemove  = document.getElementById('fi-remove');
+  var upbtn     = document.getElementById('upbtn');
+  var prog      = document.getElementById('prog');
+  var bar       = document.getElementById('bar');
+  var progLabel = document.getElementById('prog-label');
+  var progPct   = document.getElementById('prog-pct');
+  var speedTxt  = document.getElementById('speed-txt');
+  var errEl     = document.getElementById('err');
+  var res       = document.getElementById('res');
+  var resUrl    = document.getElementById('res-url');
+  var copyBtn   = document.getElementById('copy-btn');
+  var resMeta   = document.getElementById('res-meta');
+  var hist      = document.getElementById('hist');
+  var histList  = document.getElementById('hist-list');
+  var archFields= document.getElementById('arch-fields');
 
-  let file = null;
-  let history = [];
-  let t0 = 0, lastBytes = 0, lastT = 0;
+  var file = null;
+  var svc  = 'gofile';
+  var history = [];
+  var t0 = 0, lastBytes = 0, lastT = 0;
+
+  // Tabs
+  document.getElementById('tabs').querySelectorAll('.tab').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      document.getElementById('tabs').querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+      tab.classList.add('active');
+      svc = tab.dataset.svc;
+      archFields.classList.toggle('show', svc === 'archive');
+    });
+  });
 
   function fmt(b){
     if(b<1024) return b+'B';
@@ -230,37 +280,35 @@ h1 { color: #3C3489; font-size: 1.8rem; margin-bottom: 0.3rem; }
     hideErr();
     res.classList.remove('show');
     prog.classList.remove('show');
+    bar.style.width = '0%';
   }
 
   function clearFile(){
-    file = null;
-    fi.value = '';
+    file = null; fi.value = '';
     fiInfo.classList.remove('show');
     upbtn.disabled = true;
   }
 
-  function showErr(msg){ err.innerHTML = msg; err.classList.add('show'); }
-  function hideErr(){ err.classList.remove('show'); }
+  function showErr(msg){ errEl.innerHTML = msg; errEl.classList.add('show'); }
+  function hideErr(){ errEl.classList.remove('show'); }
 
-  fi.addEventListener('change', e => { if(e.target.files[0]) setFile(e.target.files[0]); });
-  dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('over'); });
-  dz.addEventListener('dragleave', () => dz.classList.remove('over'));
-  dz.addEventListener('drop', e => {
+  fi.addEventListener('change', function(e){ if(e.target.files[0]) setFile(e.target.files[0]); });
+  dz.addEventListener('dragover', function(e){ e.preventDefault(); dz.classList.add('over'); });
+  dz.addEventListener('dragleave', function(){ dz.classList.remove('over'); });
+  dz.addEventListener('drop', function(e){
     e.preventDefault(); dz.classList.remove('over');
     if(e.dataTransfer.files[0]) setFile(e.dataTransfer.files[0]);
   });
   fiRemove.addEventListener('click', clearFile);
-
-  upbtn.addEventListener('click', () => { if(file) upload(); });
-
-  copyBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText(resUrl.value).then(() => {
+  upbtn.addEventListener('click', function(){ if(file) startUpload(); });
+  copyBtn.addEventListener('click', function(){
+    navigator.clipboard.writeText(resUrl.value).then(function(){
       copyBtn.textContent = '✓ OK!';
-      setTimeout(() => copyBtn.textContent = 'Salin', 2000);
+      setTimeout(function(){ copyBtn.textContent = 'Salin'; }, 2000);
     });
   });
 
-  function upload(){
+  function startUpload(){
     upbtn.disabled = true;
     hideErr();
     res.classList.remove('show');
@@ -268,85 +316,175 @@ h1 { color: #3C3489; font-size: 1.8rem; margin-bottom: 0.3rem; }
     bar.style.width = '0%';
     progPct.textContent = '0%';
     speedTxt.textContent = '';
-    progLabel.textContent = 'Menyiapkan...';
     t0 = Date.now(); lastBytes = 0; lastT = Date.now();
 
-    const fd = new FormData();
-    fd.append('reqtype', 'fileupload');
-    fd.append('userhash', '');
-    fd.append('fileToUpload', file);
+    if(svc === 'gofile'){
+      uploadGofile();
+    } else if(svc === 'archive'){
+      uploadArchive();
+    }
+  }
 
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://catbox.moe/user/api.php');
+  // ─── GOFILE ───────────────────────────────────────────
+  function uploadGofile(){
+    progLabel.textContent = 'Mencari server gofile.io...';
 
-    xhr.upload.onprogress = function(e){
-      if(!e.lengthComputable) return;
-      const pct = Math.round(e.loaded / e.total * 95);
-      bar.style.width = pct + '%';
-      progPct.textContent = pct + '%';
-      progLabel.textContent = 'Mengupload... ' + fmt(e.loaded) + ' / ' + fmt(e.total);
-      const now = Date.now();
-      const dt = (now - lastT) / 1000;
-      if(dt >= 1){
-        speedTxt.textContent = 'Kecepatan: ' + fmt((e.loaded - lastBytes) / dt) + '/s';
-        lastBytes = e.loaded; lastT = now;
-      }
+    // Get best server first
+    var req = new XMLHttpRequest();
+    req.open('GET', 'https://api.gofile.io/servers');
+    req.onload = function(){
+      var server = 'store1';
+      try {
+        var j = JSON.parse(req.responseText);
+        if(j.status === 'ok' && j.data && j.data.servers && j.data.servers.length > 0){
+          server = j.data.servers[0].name;
+        }
+      } catch(e){}
+      doGofileUpload(server);
     };
+    req.onerror = function(){
+      // fallback to default server
+      doGofileUpload('store1');
+    };
+    req.send();
+  }
+
+  function doGofileUpload(server){
+    progLabel.textContent = 'Mengupload ke gofile.io (' + server + ')...';
+    var fd = new FormData();
+    fd.append('file', file);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://' + server + '.gofile.io/uploadFile');
+
+    xhr.upload.onprogress = trackProgress;
 
     xhr.onload = function(){
       upbtn.disabled = false;
       if(xhr.status >= 200 && xhr.status < 300){
-        const link = xhr.responseText.trim();
-        if(link.startsWith('http')){
-          bar.style.width = '100%';
-          progPct.textContent = '100%';
-          progLabel.textContent = 'Selesai!';
-          const elapsed = ((Date.now()-t0)/1000).toFixed(1);
-          speedTxt.textContent = 'Upload selesai dalam ' + elapsed + 's';
-
-          resUrl.value = link;
-          resMeta.textContent = file.name + ' · ' + fmt(file.size) + ' · catbox.moe (permanen)';
-          res.classList.add('show');
-          addHistory(file.name, link);
-        } else {
+        try {
+          var j = JSON.parse(xhr.responseText);
+          if(j.status === 'ok' && j.data && j.data.code){
+            done('https://gofile.io/d/' + j.data.code, 'gofile.io');
+          } else {
+            showErr('⚠️ gofile.io error: ' + (j.message || xhr.responseText.substring(0,100)));
+            prog.classList.remove('show');
+          }
+        } catch(e){
+          showErr('⚠️ Response tidak valid: ' + xhr.responseText.substring(0,100));
           prog.classList.remove('show');
-          showErr('⚠️ catbox.moe menolak file ini: ' + xhr.responseText.substring(0,200));
         }
       } else {
+        showErr('⚠️ Server error ' + xhr.status + ' — coba lagi beberapa saat.');
         prog.classList.remove('show');
-        showErr('⚠️ Server error ' + xhr.status + ': ' + xhr.responseText.substring(0,200));
       }
     };
 
     xhr.onerror = function(){
       upbtn.disabled = false;
       prog.classList.remove('show');
-      showErr('⚠️ Koneksi gagal (CORS/Network).<br><br>' +
-        '✅ <strong>Pastikan situs ini dibuka via GitHub Pages atau Netlify</strong>, bukan dari folder lokal (file://).<br>' +
-        'Kalau sudah di-deploy tapi masih error, coba refresh halaman.');
-    };
-
-    xhr.ontimeout = function(){
-      upbtn.disabled = false;
-      prog.classList.remove('show');
-      showErr('⚠️ Upload timeout — koneksi terlalu lambat atau file terlalu besar.');
+      // Try fallback server
+      if(server !== 'store1'){
+        showErr('⚠️ Server ' + server + ' gagal. Mencoba server cadangan...');
+        setTimeout(function(){ doGofileUpload('store1'); }, 1000);
+      } else {
+        showErr('⚠️ Koneksi ke gofile.io gagal.<br>Coba: <strong>Internet Archive</strong> (pilih tab di atas).');
+      }
     };
 
     xhr.timeout = 0;
     xhr.send(fd);
   }
 
+  // ─── INTERNET ARCHIVE ─────────────────────────────────
+  function uploadArchive(){
+    var accessKey = document.getElementById('arch-access').value.trim();
+    var secretKey = document.getElementById('arch-secret').value.trim();
+
+    if(!accessKey || !secretKey){
+      showErr('⚠️ Masukkan Access Key dan Secret Key dari <a href="https://archive.org/account/s3.php" target="_blank">archive.org/account/s3.php</a>');
+      upbtn.disabled = false;
+      prog.classList.remove('show');
+      return;
+    }
+
+    var identifier = 'vl-' + Date.now() + '-' + Math.random().toString(36).substr(2,6);
+    var filename   = file.name;
+    var url        = 'https://s3.us.archive.org/' + identifier + '/' + encodeURIComponent(filename);
+
+    progLabel.textContent = 'Mengupload ke Internet Archive...';
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('PUT', url);
+    xhr.setRequestHeader('Authorization',               'LOW ' + accessKey + ':' + secretKey);
+    xhr.setRequestHeader('x-archive-auto-make-bucket', '1');
+    xhr.setRequestHeader('x-amz-auto-make-bucket',     '1');
+    xhr.setRequestHeader('x-archive-meta-mediatype',   'movies');
+    xhr.setRequestHeader('Content-Type',                file.type || 'video/mp4');
+
+    xhr.upload.onprogress = trackProgress;
+
+    xhr.onload = function(){
+      upbtn.disabled = false;
+      if(xhr.status >= 200 && xhr.status < 300){
+        done('https://archive.org/details/' + identifier, 'Internet Archive (permanen)');
+      } else {
+        prog.classList.remove('show');
+        if(xhr.status === 403){
+          showErr('⚠️ API key salah atau tidak valid. Periksa kembali Access Key & Secret Key.<br>Buka: <a href="https://archive.org/account/s3.php" target="_blank">archive.org/account/s3.php</a>');
+        } else {
+          showErr('⚠️ Error ' + xhr.status + ': ' + xhr.responseText.substring(0,200));
+        }
+      }
+    };
+
+    xhr.onerror = function(){
+      upbtn.disabled = false;
+      prog.classList.remove('show');
+      showErr('⚠️ Koneksi ke Internet Archive gagal. Periksa koneksi internet.');
+    };
+
+    xhr.timeout = 0;
+    xhr.send(file);
+  }
+
+  // ─── SHARED ───────────────────────────────────────────
+  function trackProgress(e){
+    if(!e.lengthComputable) return;
+    var pct = Math.round(e.loaded / e.total * 95);
+    bar.style.width = pct + '%';
+    progPct.textContent = pct + '%';
+    progLabel.textContent = 'Mengupload... ' + fmt(e.loaded) + ' / ' + fmt(e.total);
+    var now = Date.now();
+    var dt = (now - lastT) / 1000;
+    if(dt >= 1){
+      speedTxt.textContent = 'Kecepatan: ' + fmt((e.loaded - lastBytes) / dt) + '/s';
+      lastBytes = e.loaded; lastT = now;
+    }
+  }
+
+  function done(link, svcName){
+    bar.style.width = '100%';
+    progPct.textContent = '100%';
+    progLabel.textContent = 'Selesai! 🎉';
+    speedTxt.textContent = 'Waktu: ' + ((Date.now()-t0)/1000).toFixed(1) + 's';
+
+    resUrl.value = link;
+    resMeta.textContent = file.name + ' · ' + fmt(file.size) + ' · ' + svcName;
+    res.classList.add('show');
+    addHistory(file.name, link);
+  }
+
   function addHistory(name, url){
-    const t = new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
-    history.unshift({name, url, t});
+    var t = new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
+    history.unshift({name:name, url:url, t:t});
     if(history.length > 8) history.pop();
     histList.innerHTML = '';
-    history.forEach(h => {
-      const li = document.createElement('li');
-      li.innerHTML =
-        '<span class="hname">🎬 ' + h.name + '</span>' +
+    history.forEach(function(h){
+      var li = document.createElement('li');
+      li.innerHTML = '<span class="hname">🎬 ' + h.name + '</span>' +
         '<a href="' + h.url + '" target="_blank">' + h.url + '</a>' +
-        '<button class="hcopy" onclick="navigator.clipboard.writeText(\'' + h.url + '\').then(()=>{this.textContent=\'✓\';setTimeout(()=>this.textContent=\'Salin\',1500)})">Salin</button>';
+        '<button class="hcopy" onclick="(function(b,u){navigator.clipboard.writeText(u).then(function(){b.textContent=\'✓\';setTimeout(function(){b.textContent=\'Salin\'},1500)})})(this,\'' + h.url + '\')">Salin</button>';
       histList.appendChild(li);
     });
     hist.style.display = 'block';
