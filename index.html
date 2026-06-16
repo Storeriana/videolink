@@ -9,7 +9,7 @@
   :root {
     --purple: #7F77DD; --purple-light: #EEEDFE; --purple-dark: #3C3489;
     --teal: #1D9E75; --teal-light: #E1F5EE;
-    --gray: #888780; --gray-light: #F1EFE8;
+    --gray: #888780;
     --text: #2C2C2A; --text-muted: #5F5E5A;
     --border: rgba(0,0,0,0.12); --radius: 12px;
   }
@@ -19,38 +19,42 @@
   .logo-icon svg { fill: white; }
   header h1 { font-size: 1.2rem; font-weight: 700; color: var(--purple-dark); }
   header span { font-size: 0.78rem; color: var(--gray); margin-left: 8px; }
-  main { max-width: 740px; margin: 3rem auto; padding: 0 1.5rem; }
-  .hero { text-align: center; margin-bottom: 2.5rem; }
-  .hero h2 { font-size: 2rem; font-weight: 800; color: var(--purple-dark); line-height: 1.2; margin-bottom: 0.75rem; }
-  .hero p { font-size: 1rem; color: var(--text-muted); }
-  .badge { display: inline-block; background: var(--teal-light); color: var(--teal); font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-bottom: 1rem; letter-spacing: 0.05em; text-transform: uppercase; }
+  main { max-width: 700px; margin: 2.5rem auto; padding: 0 1.5rem; }
+  .hero { text-align: center; margin-bottom: 2rem; }
+  .hero h2 { font-size: 1.9rem; font-weight: 800; color: var(--purple-dark); line-height: 1.2; margin-bottom: 0.6rem; }
+  .hero p { font-size: 0.95rem; color: var(--text-muted); }
+  .badge { display: inline-block; background: var(--teal-light); color: var(--teal); font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-bottom: 1rem; text-transform: uppercase; }
   .card { background: white; border-radius: var(--radius); border: 1px solid var(--border); padding: 2rem; box-shadow: 0 2px 16px rgba(127,119,221,0.07); }
-  .upload-zone { border: 2px dashed #c5c1f5; border-radius: 10px; padding: 2.5rem 1.5rem; text-align: center; cursor: pointer; transition: background 0.2s, border-color 0.2s; position: relative; background: var(--purple-light); }
+  .upload-zone { border: 2px dashed #c5c1f5; border-radius: 10px; padding: 2.5rem 1.5rem; text-align: center; cursor: pointer; transition: all 0.2s; position: relative; background: var(--purple-light); }
   .upload-zone:hover, .upload-zone.drag-over { border-color: var(--purple); background: #e4e2fb; }
   .upload-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
   .upload-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
-  .upload-zone h3 { font-size: 1.05rem; font-weight: 600; color: var(--purple-dark); margin-bottom: 0.4rem; }
-  .upload-zone p { font-size: 0.83rem; color: var(--text-muted); }
+  .upload-zone h3 { font-size: 1rem; font-weight: 600; color: var(--purple-dark); margin-bottom: 0.4rem; }
+  .upload-zone p { font-size: 0.82rem; color: var(--text-muted); }
   .formats { margin-top: 0.75rem; display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
-  .format-tag { background: white; border: 1px solid #c5c1f5; color: var(--purple); font-size: 0.72rem; font-weight: 500; padding: 2px 8px; border-radius: 20px; }
+  .format-tag { background: white; border: 1px solid #c5c1f5; color: var(--purple); font-size: 0.7rem; padding: 2px 8px; border-radius: 20px; }
+  .file-preview { display: none; margin: 1rem 0; padding: 0.75rem 1rem; background: white; border: 1px solid #c5c1f5; border-radius: 8px; align-items: center; gap: 10px; }
+  .file-preview.show { display: flex; }
+  .file-info { flex: 1; min-width: 0; }
+  .file-name { font-weight: 600; font-size: 0.85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .file-size { font-size: 0.75rem; color: var(--gray); margin-top: 2px; }
+  .btn-remove { background: none; border: none; cursor: pointer; color: var(--gray); font-size: 1.1rem; padding: 2px 6px; border-radius: 4px; }
   .section-label { font-size: 0.82rem; font-weight: 600; color: var(--text-muted); margin: 1.25rem 0 0.6rem; display: block; }
-  .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.25rem; }
-  .service-btn { padding: 0.75rem 1rem; border: 1.5px solid var(--border); border-radius: 8px; background: white; cursor: pointer; font-size: 0.82rem; transition: all 0.15s; display: flex; flex-direction: column; align-items: flex-start; gap: 3px; text-align: left; }
-  .service-btn:hover { border-color: var(--purple); }
+  .service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.1rem; }
+  .service-btn { padding: 1rem; border: 1.5px solid var(--border); border-radius: 10px; background: white; cursor: pointer; transition: all 0.15s; display: flex; flex-direction: column; gap: 4px; text-align: left; }
+  .service-btn:hover { border-color: var(--purple); background: #faf9ff; }
   .service-btn.active { border-color: var(--purple); background: var(--purple-light); }
-  .svc-header { display: flex; align-items: center; gap: 6px; width: 100%; }
-  .svc-name { font-weight: 700; font-size: 0.9rem; color: var(--text); }
-  .svc-badge { font-size: 0.65rem; font-weight: 700; padding: 1px 6px; border-radius: 10px; margin-left: auto; }
+  .svc-top { display: flex; align-items: center; justify-content: space-between; }
+  .svc-name { font-weight: 700; font-size: 0.95rem; color: var(--text); }
+  .svc-badge { font-size: 0.65rem; font-weight: 700; padding: 2px 7px; border-radius: 10px; }
   .badge-unlimited { background: #E1F5EE; color: #0F6E56; }
   .badge-large { background: #EEEDFE; color: #3C3489; }
-  .badge-medium { background: #FAEEDA; color: #633806; }
-  .svc-detail { font-size: 0.72rem; color: var(--gray); }
+  .svc-detail { font-size: 0.75rem; color: var(--gray); }
+  .svc-status { font-size: 0.7rem; font-weight: 600; color: var(--teal); }
   .service-btn.active .svc-name { color: var(--purple-dark); }
-  .service-btn.active .svc-detail { color: var(--purple); }
-  .info-box { padding: 0.75rem 1rem; border-radius: 8px; font-size: 0.8rem; line-height: 1.5; margin-bottom: 1.1rem; }
-  .info-box.blue { background: #EBF4FF; border: 1px solid #B5D4F4; color: #0C447C; }
+  .info-box { padding: 0.75rem 1rem; border-radius: 8px; font-size: 0.82rem; line-height: 1.5; margin-bottom: 1.1rem; }
   .info-box.green { background: var(--teal-light); border: 1px solid #9FE1CB; color: #085041; }
-  .info-box.amber { background: #FAEEDA; border: 1px solid #FAC775; color: #633806; }
+  .info-box.blue { background: #EBF4FF; border: 1px solid #B5D4F4; color: #0C447C; }
   .btn-upload { width: 100%; padding: 0.95rem; background: var(--purple); color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 8px; }
   .btn-upload:hover { background: var(--purple-dark); }
   .btn-upload:disabled { background: #b9b7e9; cursor: not-allowed; }
@@ -58,7 +62,7 @@
   .progress-wrap.show { display: block; }
   .progress-info { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; }
   .progress-bar-bg { background: #e4e2fb; border-radius: 20px; height: 10px; overflow: hidden; }
-  .progress-bar { height: 100%; background: linear-gradient(90deg, var(--purple), var(--teal)); border-radius: 20px; width: 0%; transition: width 0.4s; }
+  .progress-bar { height: 100%; background: linear-gradient(90deg, var(--purple), var(--teal)); border-radius: 20px; width: 0%; transition: width 0.3s; }
   .progress-speed { font-size: 0.75rem; color: var(--gray); margin-top: 4px; }
   .result-box { display: none; margin-top: 1.5rem; padding: 1.25rem; background: var(--teal-light); border-radius: 10px; border: 1px solid #9FE1CB; }
   .result-box.show { display: block; }
@@ -68,14 +72,8 @@
   .btn-copy { padding: 0.6rem 1rem; background: var(--teal); color: white; border: none; border-radius: 6px; font-size: 0.82rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
   .btn-copy:hover { background: #0F6E56; }
   .result-meta { font-size: 0.75rem; color: #085041; display: flex; gap: 1rem; flex-wrap: wrap; }
-  .error-box { display: none; margin-top: 1rem; padding: 1rem; background: #FCEBEB; border: 1px solid #F7C1C1; border-radius: 8px; font-size: 0.83rem; color: #A32D2D; line-height: 1.6; }
+  .error-box { display: none; margin-top: 1rem; padding: 1rem 1.1rem; background: #FCEBEB; border: 1px solid #F7C1C1; border-radius: 8px; font-size: 0.82rem; color: #A32D2D; line-height: 1.7; }
   .error-box.show { display: block; }
-  .file-preview { display: none; margin: 1rem 0; padding: 0.75rem 1rem; background: white; border: 1px solid #c5c1f5; border-radius: 8px; align-items: center; gap: 10px; }
-  .file-preview.show { display: flex; }
-  .file-info { flex: 1; min-width: 0; }
-  .file-name { font-weight: 600; font-size: 0.85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .file-size { font-size: 0.75rem; color: var(--gray); margin-top: 2px; }
-  .btn-remove { background: none; border: none; cursor: pointer; color: var(--gray); font-size: 1.1rem; padding: 2px 6px; border-radius: 4px; }
   .history-section { margin-top: 2rem; }
   .history-title { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.75rem; }
   .history-list { list-style: none; }
@@ -85,7 +83,6 @@
   .h-url:hover { text-decoration: underline; }
   .h-time { color: var(--gray); font-size: 0.72rem; white-space: nowrap; }
   .btn-sm { background: none; border: 1px solid #c5c1f5; color: var(--purple); font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; cursor: pointer; }
-  .btn-sm:hover { background: var(--purple-light); }
   footer { text-align: center; padding: 2rem 1rem; font-size: 0.75rem; color: var(--gray); }
 </style>
 </head>
@@ -103,15 +100,15 @@
   <div class="hero">
     <div class="badge">✓ Tanpa Login · Tanpa Batas Ukuran</div>
     <h2>Upload Video,<br>Dapatkan Link Langsung</h2>
-    <p>Mendukung file video berapapun ukurannya — 1 GB, 10 GB, bahkan lebih besar.</p>
+    <p>Upload video dan dapatkan link yang bisa langsung dibagikan.</p>
   </div>
 
   <div class="card">
     <div class="upload-zone" id="dropZone">
-      <input type="file" id="fileInput" accept="video/*">
+      <input type="file" id="fileInput" accept="video/*,*/*">
       <div class="upload-icon">🎬</div>
       <h3>Seret video ke sini atau klik untuk pilih file</h3>
-      <p>MP4, MKV, AVI, MOV, WEBM, FLV, WMV — semua ukuran didukung</p>
+      <p>Semua format & ukuran didukung</p>
       <div class="formats">
         <span class="format-tag">MP4</span><span class="format-tag">MKV</span><span class="format-tag">AVI</span>
         <span class="format-tag">MOV</span><span class="format-tag">WEBM</span><span class="format-tag">FLV</span><span class="format-tag">WMV</span>
@@ -131,67 +128,27 @@
     <div class="service-grid" id="serviceGrid">
 
       <button class="service-btn active" data-service="gofile">
-        <div class="svc-header">
-          <span class="svc-name">gofile.io</span>
+        <div class="svc-top">
+          <span class="svc-name">🟢 gofile.io</span>
           <span class="svc-badge badge-unlimited">∞ Tak Terbatas</span>
         </div>
-        <span class="svc-detail">Gratis · Hapus jika 10 hari tidak diakses</span>
-      </button>
-
-      <button class="service-btn" data-service="buzzheavier">
-        <div class="svc-header">
-          <span class="svc-name">Buzzheavier</span>
-          <span class="svc-badge badge-unlimited">∞ Tak Terbatas</span>
-        </div>
-        <span class="svc-detail">Gratis · Simpan permanen</span>
+        <span class="svc-detail">Gratis · Tidak perlu login · Support CORS ✓</span>
+        <span class="svc-status">⭐ Direkomendasikan</span>
       </button>
 
       <button class="service-btn" data-service="pixeldrain">
-        <div class="svc-header">
-          <span class="svc-name">pixeldrain</span>
+        <div class="svc-top">
+          <span class="svc-name">🟢 pixeldrain</span>
           <span class="svc-badge badge-large">20 GB</span>
         </div>
-        <span class="svc-detail">Gratis · Simpan 60 hari</span>
+        <span class="svc-detail">Gratis · 60 hari · Support CORS ✓</span>
+        <span class="svc-status">⭐ Direkomendasikan</span>
       </button>
 
-      <button class="service-btn" data-service="catbox">
-        <div class="svc-header">
-          <span class="svc-name">catbox.moe</span>
-          <span class="svc-badge badge-medium">200 MB</span>
-        </div>
-        <span class="svc-detail">Gratis · Permanen · Paling stabil</span>
-      </button>
-
-      <button class="service-btn" data-service="litterbox">
-        <div class="svc-header">
-          <span class="svc-name">litterbox</span>
-          <span class="svc-badge badge-medium">1 GB</span>
-        </div>
-        <span class="svc-detail">Sementara · Pilih durasi</span>
-      </button>
-
-      <button class="service-btn" data-service="uguu">
-        <div class="svc-header">
-          <span class="svc-name">uguu.se</span>
-          <span class="svc-badge badge-medium">100 MB</span>
-        </div>
-        <span class="svc-detail">Gratis · Simpan 48 jam</span>
-      </button>
-
-    </div>
-
-    <div id="litterboxTime" style="display:none; margin-bottom: 1rem;">
-      <span class="section-label">Durasi simpan:</span>
-      <select id="lbTime" style="width:100%; padding:0.55rem 0.75rem; border:1px solid var(--border); border-radius:7px; font-size:0.85rem; color:var(--text); background:white; outline:none;">
-        <option value="1h">1 Jam</option>
-        <option value="12h">12 Jam</option>
-        <option value="24h" selected>24 Jam</option>
-        <option value="72h">72 Jam</option>
-      </select>
     </div>
 
     <div class="info-box green" id="infoBox">
-      🚀 <strong>gofile.io</strong> — Tidak ada batas ukuran. File otomatis terhapus jika tidak diakses selama 10 hari. Cocok untuk berbagi video besar.
+      🚀 <strong>gofile.io</strong> — Tidak ada batas ukuran file. Gratis tanpa login. File terhapus otomatis jika tidak diakses 10 hari.
     </div>
 
     <button class="btn-upload" id="uploadBtn" disabled>⬆ Upload &amp; Generate Link</button>
@@ -223,57 +180,51 @@
   </div>
 </main>
 
-<footer>VideoLink mengirim file langsung dari browser Anda ke layanan pihak ketiga. Tidak ada data yang melewati server kami.</footer>
+<footer>File dikirim langsung dari browser ke layanan pihak ketiga. Tidak ada data melewati server kami.</footer>
 
 <script>
-const fileInput = document.getElementById('fileInput');
-const dropZone = document.getElementById('dropZone');
+const fileInput   = document.getElementById('fileInput');
+const dropZone    = document.getElementById('dropZone');
 const filePreview = document.getElementById('filePreview');
-const fileNameEl = document.getElementById('fileName');
-const fileSizeEl = document.getElementById('fileSize');
+const fileNameEl  = document.getElementById('fileName');
+const fileSizeEl  = document.getElementById('fileSize');
 const removeFileBtn = document.getElementById('removeFile');
-const uploadBtn = document.getElementById('uploadBtn');
+const uploadBtn   = document.getElementById('uploadBtn');
 const progressWrap = document.getElementById('progressWrap');
-const progressBar = document.getElementById('progressBar');
+const progressBar  = document.getElementById('progressBar');
 const progressLabel = document.getElementById('progressLabel');
-const progressPct = document.getElementById('progressPct');
+const progressPct  = document.getElementById('progressPct');
 const progressSpeed = document.getElementById('progressSpeed');
-const errorBox = document.getElementById('errorBox');
-const resultBox = document.getElementById('resultBox');
-const resultUrl = document.getElementById('resultUrl');
-const copyBtn = document.getElementById('copyBtn');
-const resultMeta = document.getElementById('resultMeta');
+const errorBox    = document.getElementById('errorBox');
+const resultBox   = document.getElementById('resultBox');
+const resultUrl   = document.getElementById('resultUrl');
+const copyBtn     = document.getElementById('copyBtn');
+const resultMeta  = document.getElementById('resultMeta');
 const historySection = document.getElementById('historySection');
 const historyList = document.getElementById('historyList');
-const serviceGrid = document.getElementById('serviceGrid');
-const litterboxTime = document.getElementById('litterboxTime');
-const infoBox = document.getElementById('infoBox');
+const infoBox     = document.getElementById('infoBox');
 
 let selectedFile = null;
 let selectedService = 'gofile';
 let uploadHistory = [];
-let uploadStartTime = 0;
+let uploadStart = 0, lastLoaded = 0, lastSpeedTime = 0;
 
 const serviceData = {
-  gofile:      { label: 'gofile.io', cls: 'green',  info: '🚀 <strong>gofile.io</strong> — Tidak ada batas ukuran. File otomatis terhapus jika tidak diakses selama 10 hari.' },
-  buzzheavier: { label: 'Buzzheavier', cls: 'green', info: '🔒 <strong>Buzzheavier</strong> — Tidak ada batas ukuran. File disimpan permanen gratis.' },
-  pixeldrain:  { label: 'pixeldrain', cls: 'blue',  info: '💧 <strong>pixeldrain</strong> — Maks 20 GB per file. Disimpan 60 hari. Kecepatan download tinggi.' },
-  catbox:      { label: 'catbox.moe', cls: 'green', info: '📦 <strong>catbox.moe</strong> — Maks 200 MB. Simpan permanen. Paling stabil & cepat.' },
-  litterbox:   { label: 'litterbox',  cls: 'amber', info: '⏱ <strong>litterbox</strong> — Maks 1 GB. File sementara, pilih durasi simpan.' },
-  uguu:        { label: 'uguu.se',    cls: 'amber', info: '🕐 <strong>uguu.se</strong> — Maks 100 MB. Simpan 48 jam. Tanpa akun.' }
+  gofile:     { label: 'gofile.io',  cls: 'green', info: '🚀 <strong>gofile.io</strong> — Tidak ada batas ukuran. Gratis tanpa login. File terhapus jika 10 hari tidak diakses.' },
+  pixeldrain: { label: 'pixeldrain', cls: 'blue',  info: '💧 <strong>pixeldrain</strong> — Maks 20 GB. Disimpan 60 hari. Kecepatan download tinggi.' }
 };
 
-function formatSize(bytes) {
-  if (bytes < 1024) return bytes + ' B';
-  if (bytes < 1048576) return (bytes/1024).toFixed(1) + ' KB';
-  if (bytes < 1073741824) return (bytes/1048576).toFixed(1) + ' MB';
-  return (bytes/1073741824).toFixed(2) + ' GB';
+function formatSize(b) {
+  if (b < 1024) return b + ' B';
+  if (b < 1048576) return (b/1024).toFixed(1) + ' KB';
+  if (b < 1073741824) return (b/1048576).toFixed(1) + ' MB';
+  return (b/1073741824).toFixed(2) + ' GB';
 }
 
-function setFile(file) {
-  selectedFile = file;
-  fileNameEl.textContent = file.name;
-  fileSizeEl.textContent = formatSize(file.size);
+function setFile(f) {
+  selectedFile = f;
+  fileNameEl.textContent = f.name;
+  fileSizeEl.textContent = formatSize(f.size);
   filePreview.classList.add('show');
   uploadBtn.disabled = false;
   hideError();
@@ -294,12 +245,11 @@ removeFileBtn.addEventListener('click', () => {
   resultBox.classList.remove('show'); hideError(); progressWrap.classList.remove('show');
 });
 
-serviceGrid.querySelectorAll('.service-btn').forEach(btn => {
+document.getElementById('serviceGrid').querySelectorAll('.service-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    serviceGrid.querySelectorAll('.service-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('serviceGrid').querySelectorAll('.service-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     selectedService = btn.dataset.service;
-    litterboxTime.style.display = selectedService === 'litterbox' ? 'block' : 'none';
     const d = serviceData[selectedService];
     infoBox.className = 'info-box ' + d.cls;
     infoBox.innerHTML = d.info;
@@ -319,93 +269,51 @@ async function doUpload() {
   progressBar.style.width = '0%';
   progressPct.textContent = '0%';
   progressSpeed.textContent = '';
-  uploadStartTime = Date.now();
+  uploadStart = Date.now();
+  lastLoaded = 0; lastSpeedTime = Date.now();
 
   try {
     let link = '';
 
     if (selectedService === 'gofile') {
       // Step 1: get best server
-      progressLabel.textContent = 'Mencari server terbaik...';
-      const serverResp = await fetch('https://api.gofile.io/servers');
-      const serverJson = await serverResp.json();
-      if (serverJson.status !== 'ok') throw new Error('Tidak bisa mendapatkan server gofile.io');
-      const server = serverJson.data.servers[0].name;
+      progressLabel.textContent = 'Mencari server gofile.io...';
+      let server = 'store1';
+      try {
+        const r = await fetch('https://api.gofile.io/servers');
+        const j = await r.json();
+        if (j.status === 'ok' && j.data.servers.length > 0) {
+          server = j.data.servers[0].name;
+        }
+      } catch(e) { /* use default */ }
 
       // Step 2: upload
       progressLabel.textContent = 'Mengupload ke gofile.io...';
       const fd = new FormData();
       fd.append('file', selectedFile);
-      const resp = await xhrUpload(`https://${server}.gofile.io/uploadFile`, fd);
-      const json = JSON.parse(resp);
-      if (json.status !== 'ok') throw new Error('Upload gagal: ' + (json.message || JSON.stringify(json)));
-      link = json.data.downloadPage || `https://gofile.io/d/${json.data.code}`;
-
-    } else if (selectedService === 'buzzheavier') {
-      progressLabel.textContent = 'Mengupload ke Buzzheavier...';
-      const fd = new FormData();
-      fd.append('file', selectedFile);
-      const resp = await xhrUpload('https://buzzheavier.com/upload', fd);
-      // Response is plain text URL
-      link = resp.trim();
-      if (!link.startsWith('http')) {
-        // Try JSON parse
-        try {
-          const j = JSON.parse(resp);
-          link = j.url || j.link || j.id;
-          if (link && !link.startsWith('http')) link = 'https://buzzheavier.com/f/' + link;
-        } catch(e) { throw new Error('Upload buzzheavier gagal: ' + resp.substring(0,200)); }
-      }
+      const raw = await xhrUpload(`https://${server}.gofile.io/uploadFile`, fd);
+      const json = JSON.parse(raw);
+      if (json.status !== 'ok') throw new Error('gofile gagal: ' + (json.message || raw.substring(0,100)));
+      link = `https://gofile.io/d/${json.data.code}`;
 
     } else if (selectedService === 'pixeldrain') {
       progressLabel.textContent = 'Mengupload ke pixeldrain...';
-      const fd = new FormData();
-      fd.append('file', selectedFile);
-      const resp = await xhrUpload('https://pixeldrain.com/api/file', fd);
-      const json = JSON.parse(resp);
-      if (!json.id) throw new Error('Upload pixeldrain gagal: ' + resp);
+      // pixeldrain supports CORS on /api/file with PUT (binary) — more reliable than FormData
+      const raw = await xhrUploadBinary(
+        `https://pixeldrain.com/api/file/${encodeURIComponent(selectedFile.name)}`,
+        selectedFile
+      );
+      const json = JSON.parse(raw);
+      if (!json.id) throw new Error('pixeldrain gagal: ' + raw.substring(0,100));
       link = `https://pixeldrain.com/u/${json.id}`;
-
-    } else if (selectedService === 'catbox') {
-      progressLabel.textContent = 'Mengupload ke catbox.moe...';
-      const fd = new FormData();
-      fd.append('reqtype', 'fileupload');
-      fd.append('userhash', '');
-      fd.append('fileToUpload', selectedFile);
-      const resp = await xhrUpload('https://catbox.moe/user/api.php', fd);
-      link = resp.trim();
-      if (!link.startsWith('http')) throw new Error('Upload catbox gagal: ' + resp);
-
-    } else if (selectedService === 'litterbox') {
-      progressLabel.textContent = 'Mengupload ke litterbox...';
-      const fd = new FormData();
-      fd.append('reqtype', 'fileupload');
-      fd.append('time', document.getElementById('lbTime').value);
-      fd.append('fileToUpload', selectedFile);
-      const resp = await xhrUpload('https://litterbox.catbox.moe/resources/internals/api.php', fd);
-      link = resp.trim();
-      if (!link.startsWith('http')) throw new Error('Upload litterbox gagal: ' + resp);
-
-    } else if (selectedService === 'uguu') {
-      progressLabel.textContent = 'Mengupload ke uguu.se...';
-      const fd = new FormData();
-      fd.append('files[]', selectedFile);
-      const resp = await xhrUpload('https://uguu.se/upload', fd);
-      const json = JSON.parse(resp);
-      if (json && json.files && json.files[0] && json.files[0].url) {
-        link = json.files[0].url;
-      } else {
-        throw new Error('Format respons uguu.se tidak dikenali');
-      }
     }
 
     progressBar.style.width = '100%';
     progressPct.textContent = '100%';
-    progressLabel.textContent = 'Upload selesai!';
-
-    const elapsed = ((Date.now() - uploadStartTime) / 1000).toFixed(1);
-    const speed = formatSize(selectedFile.size / ((Date.now() - uploadStartTime) / 1000));
-    progressSpeed.textContent = `Selesai dalam ${elapsed}s · Rata-rata ${speed}/s`;
+    progressLabel.textContent = 'Upload selesai! 🎉';
+    const elapsed = ((Date.now() - uploadStart) / 1000).toFixed(1);
+    const avgSpeed = formatSize(selectedFile.size / ((Date.now() - uploadStart) / 1000));
+    progressSpeed.textContent = `Selesai dalam ${elapsed}s · Rata-rata ${avgSpeed}/s`;
 
     resultUrl.value = link;
     resultMeta.innerHTML = `<span>📁 ${selectedFile.name}</span><span>📦 ${formatSize(selectedFile.size)}</span><span>☁️ ${serviceData[selectedService].label}</span>`;
@@ -414,51 +322,63 @@ async function doUpload() {
 
   } catch(err) {
     progressWrap.classList.remove('show');
-    let msg = err.message || 'Terjadi kesalahan.';
-    if (msg.toLowerCase().includes('failed to fetch') || msg.toLowerCase().includes('cors') || msg.toLowerCase().includes('network')) {
-      msg = `⚠️ Koneksi ke <b>${serviceData[selectedService].label}</b> gagal.<br><br>
-      💡 <b>Coba langkah ini:</b><br>
-      • Pilih layanan lain di atas<br>
-      • Pastikan koneksi internet stabil<br>
-      • Buka dengan Chrome / Firefox terbaru<br>
-      • Jika pakai VPN, coba matikan dulu`;
+    const msg = err.message || '';
+    const isCors = msg.toLowerCase().includes('fetch') || msg.toLowerCase().includes('cors') || msg.toLowerCase().includes('network') || msg === 'Failed to fetch';
+    if (isCors) {
+      showError(`⚠️ <strong>Koneksi gagal (CORS / Network Error)</strong><br><br>
+        Kemungkinan penyebab:<br>
+        • Situs belum di-deploy — masih dibuka dari folder lokal<br>
+        • Koneksi internet tidak stabil<br><br>
+        ✅ <strong>Solusi: Upload file ini ke GitHub Pages atau Netlify</strong><br>
+        Setelah online, upload video pasti berhasil.`);
     } else {
-      msg = '⚠️ ' + msg;
+      showError('⚠️ ' + msg);
     }
-    showError(msg);
   } finally {
     uploadBtn.disabled = false;
   }
 }
 
+// XHR with FormData + progress
 function xhrUpload(url, formData) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', url);
-    let lastLoaded = 0, lastTime = Date.now();
-    xhr.upload.onprogress = e => {
-      if (e.lengthComputable) {
-        const pct = Math.round((e.loaded / e.total) * 95);
-        progressBar.style.width = pct + '%';
-        progressPct.textContent = pct + '%';
-        const now = Date.now();
-        const dt = (now - lastTime) / 1000;
-        if (dt > 0.5) {
-          const spd = formatSize((e.loaded - lastLoaded) / dt);
-          progressSpeed.textContent = `Kecepatan: ${spd}/s · ${formatSize(e.loaded)} / ${formatSize(e.total)}`;
-          lastLoaded = e.loaded; lastTime = now;
-        }
-        progressLabel.textContent = `Mengupload... ${formatSize(e.loaded)} / ${formatSize(e.total)}`;
-      }
-    };
-    xhr.onload = () => {
-      if (xhr.status >= 200 && xhr.status < 300) resolve(xhr.responseText);
-      else reject(new Error(`Server error ${xhr.status}: ${xhr.responseText.substring(0,300)}`));
-    };
+    xhr.upload.onprogress = trackProgress;
+    xhr.onload = () => xhr.status >= 200 && xhr.status < 300 ? resolve(xhr.responseText) : reject(new Error(`HTTP ${xhr.status}: ${xhr.responseText.substring(0,200)}`));
     xhr.onerror = () => reject(new Error('Failed to fetch'));
     xhr.timeout = 0;
     xhr.send(formData);
   });
+}
+
+// XHR with raw binary PUT + progress (pixeldrain preferred method)
+function xhrUploadBinary(url, file) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('PUT', url);
+    xhr.setRequestHeader('Content-Type', file.type || 'application/octet-stream');
+    xhr.upload.onprogress = trackProgress;
+    xhr.onload = () => xhr.status >= 200 && xhr.status < 300 ? resolve(xhr.responseText) : reject(new Error(`HTTP ${xhr.status}: ${xhr.responseText.substring(0,200)}`));
+    xhr.onerror = () => reject(new Error('Failed to fetch'));
+    xhr.timeout = 0;
+    xhr.send(file);
+  });
+}
+
+function trackProgress(e) {
+  if (!e.lengthComputable) return;
+  const pct = Math.round((e.loaded / e.total) * 95);
+  progressBar.style.width = pct + '%';
+  progressPct.textContent = pct + '%';
+  const now = Date.now();
+  const dt = (now - lastSpeedTime) / 1000;
+  if (dt >= 1) {
+    const spd = formatSize((e.loaded - lastLoaded) / dt);
+    progressSpeed.textContent = `Kecepatan: ${spd}/s · ${formatSize(e.loaded)} / ${formatSize(e.total)}`;
+    lastLoaded = e.loaded; lastSpeedTime = now;
+  }
+  progressLabel.textContent = `Mengupload... ${formatSize(e.loaded)} / ${formatSize(e.total)}`;
 }
 
 copyBtn.addEventListener('click', () => {
