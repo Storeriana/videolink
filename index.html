@@ -9,7 +9,7 @@
   :root {
     --purple: #7F77DD; --purple-light: #EEEDFE; --purple-dark: #3C3489;
     --teal: #1D9E75; --teal-light: #E1F5EE;
-    --gray: #888780;
+    --gray: #888780; --gray-light: #F1EFE8;
     --text: #2C2C2A; --text-muted: #5F5E5A;
     --border: rgba(0,0,0,0.12); --radius: 12px;
   }
@@ -38,23 +38,36 @@
   .file-info { flex: 1; min-width: 0; }
   .file-name { font-weight: 600; font-size: 0.85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .file-size { font-size: 0.75rem; color: var(--gray); margin-top: 2px; }
-  .btn-remove { background: none; border: none; cursor: pointer; color: var(--gray); font-size: 1.1rem; padding: 2px 6px; border-radius: 4px; }
+  .btn-remove { background: none; border: none; cursor: pointer; color: var(--gray); font-size: 1.1rem; padding: 2px 6px; }
   .section-label { font-size: 0.82rem; font-weight: 600; color: var(--text-muted); margin: 1.25rem 0 0.6rem; display: block; }
-  .service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.1rem; }
-  .service-btn { padding: 1rem; border: 1.5px solid var(--border); border-radius: 10px; background: white; cursor: pointer; transition: all 0.15s; display: flex; flex-direction: column; gap: 4px; text-align: left; }
+  .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.1rem; }
+  .service-btn { padding: 0.85rem; border: 1.5px solid var(--border); border-radius: 10px; background: white; cursor: pointer; transition: all 0.15s; display: flex; flex-direction: column; gap: 4px; text-align: left; }
   .service-btn:hover { border-color: var(--purple); background: #faf9ff; }
   .service-btn.active { border-color: var(--purple); background: var(--purple-light); }
-  .svc-top { display: flex; align-items: center; justify-content: space-between; }
-  .svc-name { font-weight: 700; font-size: 0.95rem; color: var(--text); }
-  .svc-badge { font-size: 0.65rem; font-weight: 700; padding: 2px 7px; border-radius: 10px; }
+  .svc-top { display: flex; align-items: center; justify-content: space-between; gap: 4px; }
+  .svc-name { font-weight: 700; font-size: 0.88rem; color: var(--text); }
+  .svc-badge { font-size: 0.6rem; font-weight: 700; padding: 2px 6px; border-radius: 8px; white-space: nowrap; }
   .badge-unlimited { background: #E1F5EE; color: #0F6E56; }
   .badge-large { background: #EEEDFE; color: #3C3489; }
-  .svc-detail { font-size: 0.75rem; color: var(--gray); }
-  .svc-status { font-size: 0.7rem; font-weight: 600; color: var(--teal); }
+  .badge-permanent { background: #fff3cd; color: #7a5c00; }
+  .svc-detail { font-size: 0.7rem; color: var(--gray); line-height: 1.4; }
   .service-btn.active .svc-name { color: var(--purple-dark); }
-  .info-box { padding: 0.75rem 1rem; border-radius: 8px; font-size: 0.82rem; line-height: 1.5; margin-bottom: 1.1rem; }
+  .service-btn.active .svc-detail { color: var(--purple); }
+
+  /* Archive key input */
+  .archive-key-box { display: none; background: #fff8e1; border: 1px solid #ffe082; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+  .archive-key-box.show { display: block; }
+  .archive-key-box p { font-size: 0.78rem; color: #7a5c00; margin-bottom: 8px; line-height: 1.5; }
+  .archive-key-box a { color: #185FA5; }
+  .key-row { display: flex; gap: 8px; margin-bottom: 6px; }
+  .key-row input { flex: 1; padding: 0.5rem 0.7rem; border: 1px solid #ffe082; border-radius: 6px; font-size: 0.82rem; outline: none; background: white; }
+  .key-row input:focus { border-color: #ffc107; }
+
+  .info-box { padding: 0.7rem 1rem; border-radius: 8px; font-size: 0.8rem; line-height: 1.5; margin-bottom: 1.1rem; }
   .info-box.green { background: var(--teal-light); border: 1px solid #9FE1CB; color: #085041; }
   .info-box.blue { background: #EBF4FF; border: 1px solid #B5D4F4; color: #0C447C; }
+  .info-box.amber { background: #fff8e1; border: 1px solid #ffe082; color: #7a5c00; }
+
   .btn-upload { width: 100%; padding: 0.95rem; background: var(--purple); color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 8px; }
   .btn-upload:hover { background: var(--purple-dark); }
   .btn-upload:disabled { background: #b9b7e9; cursor: not-allowed; }
@@ -72,7 +85,7 @@
   .btn-copy { padding: 0.6rem 1rem; background: var(--teal); color: white; border: none; border-radius: 6px; font-size: 0.82rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
   .btn-copy:hover { background: #0F6E56; }
   .result-meta { font-size: 0.75rem; color: #085041; display: flex; gap: 1rem; flex-wrap: wrap; }
-  .error-box { display: none; margin-top: 1rem; padding: 1rem 1.1rem; background: #FCEBEB; border: 1px solid #F7C1C1; border-radius: 8px; font-size: 0.82rem; color: #A32D2D; line-height: 1.7; }
+  .error-box { display: none; margin-top: 1rem; padding: 1rem; background: #FCEBEB; border: 1px solid #F7C1C1; border-radius: 8px; font-size: 0.82rem; color: #A32D2D; line-height: 1.7; }
   .error-box.show { display: block; }
   .history-section { margin-top: 2rem; }
   .history-title { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.75rem; }
@@ -87,7 +100,6 @@
 </style>
 </head>
 <body>
-
 <header>
   <div class="logo-icon">
     <svg width="20" height="20" viewBox="0 0 24 24"><path d="M15 10l4.553-2.277A1 1 0 0 1 21 8.6v6.8a1 1 0 0 1-1.447.877L15 14M3 8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"/></svg>
@@ -98,9 +110,9 @@
 
 <main>
   <div class="hero">
-    <div class="badge">✓ Tanpa Login · Tanpa Batas Ukuran</div>
+    <div class="badge">✓ Tanpa Login · Pilih Layanan Sesuai Kebutuhan</div>
     <h2>Upload Video,<br>Dapatkan Link Langsung</h2>
-    <p>Upload video dan dapatkan link yang bisa langsung dibagikan.</p>
+    <p>Pilih layanan sesuai kebutuhan — sementara atau permanen selamanya.</p>
   </div>
 
   <div class="card">
@@ -129,26 +141,48 @@
 
       <button class="service-btn active" data-service="gofile">
         <div class="svc-top">
-          <span class="svc-name">🟢 gofile.io</span>
+          <span class="svc-name">gofile.io</span>
           <span class="svc-badge badge-unlimited">∞ Tak Terbatas</span>
         </div>
-        <span class="svc-detail">Gratis · Tidak perlu login · Support CORS ✓</span>
-        <span class="svc-status">⭐ Direkomendasikan</span>
+        <span class="svc-detail">Gratis · Hapus jika 10 hari tak aktif</span>
       </button>
 
-      <button class="service-btn" data-service="pixeldrain">
+      <button class="service-btn" data-service="catbox">
         <div class="svc-top">
-          <span class="svc-name">🟢 pixeldrain</span>
-          <span class="svc-badge badge-large">20 GB</span>
+          <span class="svc-name">catbox.moe</span>
+          <span class="svc-badge badge-large">200 MB</span>
         </div>
-        <span class="svc-detail">Gratis · 60 hari · Support CORS ✓</span>
-        <span class="svc-status">⭐ Direkomendasikan</span>
+        <span class="svc-detail">Gratis · Permanen · Stabil</span>
+      </button>
+
+      <button class="service-btn" data-service="archive">
+        <div class="svc-top">
+          <span class="svc-name">Internet Archive</span>
+          <span class="svc-badge badge-permanent">∞ Permanen</span>
+        </div>
+        <span class="svc-detail">Gratis · Simpan selamanya · Butuh API key gratis</span>
       </button>
 
     </div>
 
+    <!-- Internet Archive key input -->
+    <div class="archive-key-box" id="archiveKeyBox">
+      <p>
+        🏛️ <strong>Internet Archive</strong> menyimpan file Anda <strong>selamanya secara gratis</strong> tanpa batas ukuran.<br>
+        Butuh API key gratis (1 menit setup):
+        <a href="https://archive.org/account/s3.php" target="_blank">archive.org/account/s3.php</a>
+        → Login/daftar gratis → Copy <strong>Access Key</strong> & <strong>Secret Key</strong>
+      </p>
+      <div class="key-row">
+        <input type="text" id="archiveAccessKey" placeholder="Access Key (contoh: ABCdef123456...)">
+      </div>
+      <div class="key-row">
+        <input type="password" id="archiveSecretKey" placeholder="Secret Key (contoh: xYz789...)">
+      </div>
+    </div>
+
     <div class="info-box green" id="infoBox">
-      🚀 <strong>gofile.io</strong> — Tidak ada batas ukuran file. Gratis tanpa login. File terhapus otomatis jika tidak diakses 10 hari.
+      🚀 <strong>gofile.io</strong> — Tidak ada batas ukuran. Gratis tanpa login. File terhapus otomatis jika 10 hari tidak diakses.
     </div>
 
     <button class="btn-upload" id="uploadBtn" disabled>⬆ Upload &amp; Generate Link</button>
@@ -203,6 +237,7 @@ const resultMeta  = document.getElementById('resultMeta');
 const historySection = document.getElementById('historySection');
 const historyList = document.getElementById('historyList');
 const infoBox     = document.getElementById('infoBox');
+const archiveKeyBox = document.getElementById('archiveKeyBox');
 
 let selectedFile = null;
 let selectedService = 'gofile';
@@ -210,8 +245,9 @@ let uploadHistory = [];
 let uploadStart = 0, lastLoaded = 0, lastSpeedTime = 0;
 
 const serviceData = {
-  gofile:     { label: 'gofile.io',  cls: 'green', info: '🚀 <strong>gofile.io</strong> — Tidak ada batas ukuran. Gratis tanpa login. File terhapus jika 10 hari tidak diakses.' },
-  pixeldrain: { label: 'pixeldrain', cls: 'blue',  info: '💧 <strong>pixeldrain</strong> — Maks 20 GB. Disimpan 60 hari. Kecepatan download tinggi.' }
+  gofile:     { label: 'gofile.io',          cls: 'green', info: '🚀 <strong>gofile.io</strong> — Tidak ada batas ukuran. Gratis tanpa login. File terhapus otomatis jika 10 hari tidak diakses.' },
+  catbox:     { label: 'catbox.moe',          cls: 'green',  info: '📦 <strong>catbox.moe</strong> — Maks 200 MB. Simpan permanen. Paling stabil & cepat.' },
+  archive:    { label: 'Internet Archive',    cls: 'amber', info: '🏛️ <strong>Internet Archive</strong> — File disimpan <strong>selamanya</strong>, tidak ada batas ukuran. Butuh API key gratis dari archive.org.' }
 };
 
 function formatSize(b) {
@@ -253,6 +289,7 @@ document.getElementById('serviceGrid').querySelectorAll('.service-btn').forEach(
     const d = serviceData[selectedService];
     infoBox.className = 'info-box ' + d.cls;
     infoBox.innerHTML = d.info;
+    archiveKeyBox.classList.toggle('show', selectedService === 'archive');
   });
 });
 
@@ -276,18 +313,14 @@ async function doUpload() {
     let link = '';
 
     if (selectedService === 'gofile') {
-      // Step 1: get best server
       progressLabel.textContent = 'Mencari server gofile.io...';
       let server = 'store1';
       try {
         const r = await fetch('https://api.gofile.io/servers');
         const j = await r.json();
-        if (j.status === 'ok' && j.data.servers.length > 0) {
-          server = j.data.servers[0].name;
-        }
-      } catch(e) { /* use default */ }
+        if (j.status === 'ok' && j.data.servers.length > 0) server = j.data.servers[0].name;
+      } catch(e) {}
 
-      // Step 2: upload
       progressLabel.textContent = 'Mengupload ke gofile.io...';
       const fd = new FormData();
       fd.append('file', selectedFile);
@@ -296,16 +329,40 @@ async function doUpload() {
       if (json.status !== 'ok') throw new Error('gofile gagal: ' + (json.message || raw.substring(0,100)));
       link = `https://gofile.io/d/${json.data.code}`;
 
-    } else if (selectedService === 'pixeldrain') {
-      progressLabel.textContent = 'Mengupload ke pixeldrain...';
-      // pixeldrain supports CORS on /api/file with PUT (binary) — more reliable than FormData
-      const raw = await xhrUploadBinary(
-        `https://pixeldrain.com/api/file/${encodeURIComponent(selectedFile.name)}`,
-        selectedFile
-      );
-      const json = JSON.parse(raw);
-      if (!json.id) throw new Error('pixeldrain gagal: ' + raw.substring(0,100));
-      link = `https://pixeldrain.com/u/${json.id}`;
+    } else if (selectedService === 'catbox') {
+      progressLabel.textContent = 'Mengupload ke catbox.moe...';
+      const fd = new FormData();
+      fd.append('reqtype', 'fileupload');
+      fd.append('userhash', '');
+      fd.append('fileToUpload', selectedFile);
+      const raw = await xhrUpload('https://catbox.moe/user/api.php', fd);
+      link = raw.trim();
+      if (!link.startsWith('http')) throw new Error('catbox gagal: ' + raw.substring(0,150));
+
+    } else if (selectedService === 'archive') {
+      const accessKey = document.getElementById('archiveAccessKey').value.trim();
+      const secretKey = document.getElementById('archiveSecretKey').value.trim();
+      if (!accessKey || !secretKey) {
+        throw new Error('Masukkan Access Key dan Secret Key dari archive.org terlebih dahulu.<br>Daftar gratis di: <a href="https://archive.org/account/s3.php" target="_blank">archive.org/account/s3.php</a>');
+      }
+
+      // Generate unique identifier
+      const identifier = 'videolink-' + Date.now() + '-' + Math.random().toString(36).substring(2,8);
+      const filename = selectedFile.name;
+      const uploadUrl = `https://s3.us.archive.org/${identifier}/${encodeURIComponent(filename)}`;
+
+      progressLabel.textContent = 'Mengupload ke Internet Archive...';
+
+      const raw = await xhrUploadBinaryWithHeaders(uploadUrl, selectedFile, {
+        'Authorization': `LOW ${accessKey}:${secretKey}`,
+        'x-archive-auto-make-bucket': '1',
+        'x-amz-auto-make-bucket': '1',
+        'x-archive-meta-mediatype': 'movies',
+        'x-archive-meta-subject': 'video',
+        'Content-Type': selectedFile.type || 'video/mp4'
+      });
+
+      link = `https://archive.org/details/${identifier}`;
     }
 
     progressBar.style.width = '100%';
@@ -323,14 +380,9 @@ async function doUpload() {
   } catch(err) {
     progressWrap.classList.remove('show');
     const msg = err.message || '';
-    const isCors = msg.toLowerCase().includes('fetch') || msg.toLowerCase().includes('cors') || msg.toLowerCase().includes('network') || msg === 'Failed to fetch';
-    if (isCors) {
-      showError(`⚠️ <strong>Koneksi gagal (CORS / Network Error)</strong><br><br>
-        Kemungkinan penyebab:<br>
-        • Situs belum di-deploy — masih dibuka dari folder lokal<br>
-        • Koneksi internet tidak stabil<br><br>
-        ✅ <strong>Solusi: Upload file ini ke GitHub Pages atau Netlify</strong><br>
-        Setelah online, upload video pasti berhasil.`);
+    const isCors = msg.toLowerCase().includes('fetch') || msg.toLowerCase().includes('network') || msg === 'Failed to fetch';
+    if (isCors && selectedService !== 'archive') {
+      showError(`⚠️ <strong>Koneksi gagal</strong> — Pastikan situs ini sudah di-deploy (GitHub Pages / Netlify), bukan dibuka dari folder lokal.`);
     } else {
       showError('⚠️ ' + msg);
     }
@@ -339,7 +391,6 @@ async function doUpload() {
   }
 }
 
-// XHR with FormData + progress
 function xhrUpload(url, formData) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
@@ -352,7 +403,6 @@ function xhrUpload(url, formData) {
   });
 }
 
-// XHR with raw binary PUT + progress (pixeldrain preferred method)
 function xhrUploadBinary(url, file) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
@@ -361,6 +411,24 @@ function xhrUploadBinary(url, file) {
     xhr.upload.onprogress = trackProgress;
     xhr.onload = () => xhr.status >= 200 && xhr.status < 300 ? resolve(xhr.responseText) : reject(new Error(`HTTP ${xhr.status}: ${xhr.responseText.substring(0,200)}`));
     xhr.onerror = () => reject(new Error('Failed to fetch'));
+    xhr.timeout = 0;
+    xhr.send(file);
+  });
+}
+
+function xhrUploadBinaryWithHeaders(url, file, headers) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('PUT', url);
+    for (const [k, v] of Object.entries(headers)) {
+      xhr.setRequestHeader(k, v);
+    }
+    xhr.upload.onprogress = trackProgress;
+    xhr.onload = () => {
+      if (xhr.status >= 200 && xhr.status < 300) resolve(xhr.responseText);
+      else reject(new Error(`HTTP ${xhr.status}: ${xhr.responseText.substring(0,300)}`));
+    };
+    xhr.onerror = () => reject(new Error('Failed to fetch — pastikan API key benar dan koneksi stabil'));
     xhr.timeout = 0;
     xhr.send(file);
   });
