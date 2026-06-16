@@ -6,7 +6,6 @@
 <title>VideoLink — Convert Video ke URL</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  
   :root {
     --purple: #7F77DD;
     --purple-light: #EEEDFE;
@@ -17,418 +16,77 @@
     --gray-light: #F1EFE8;
     --text: #2C2C2A;
     --text-muted: #5F5E5A;
-    --bg: #ffffff;
     --border: rgba(0,0,0,0.12);
     --radius: 12px;
   }
-
-  body {
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    background: #f8f7ff;
-    min-height: 100vh;
-    color: var(--text);
-  }
-
-  header {
-    background: white;
-    border-bottom: 1px solid var(--border);
-    padding: 1rem 2rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .logo-icon {
-    width: 36px; height: 36px;
-    background: var(--purple);
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-  }
-
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f8f7ff; min-height: 100vh; color: var(--text); }
+  header { background: white; border-bottom: 1px solid var(--border); padding: 1rem 2rem; display: flex; align-items: center; gap: 10px; }
+  .logo-icon { width: 36px; height: 36px; background: var(--purple); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
   .logo-icon svg { fill: white; }
-
   header h1 { font-size: 1.2rem; font-weight: 700; color: var(--purple-dark); }
   header span { font-size: 0.78rem; color: var(--gray); margin-left: 8px; }
-
-  main {
-    max-width: 720px;
-    margin: 3rem auto;
-    padding: 0 1.5rem;
-  }
-
-  .hero {
-    text-align: center;
-    margin-bottom: 2.5rem;
-  }
-
-  .hero h2 {
-    font-size: 2rem;
-    font-weight: 800;
-    color: var(--purple-dark);
-    line-height: 1.2;
-    margin-bottom: 0.75rem;
-  }
-
-  .hero p {
-    font-size: 1rem;
-    color: var(--text-muted);
-  }
-
-  .badge {
-    display: inline-block;
-    background: var(--teal-light);
-    color: var(--teal);
-    font-size: 0.72rem;
-    font-weight: 600;
-    padding: 3px 10px;
-    border-radius: 20px;
-    margin-bottom: 1rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-
-  .card {
-    background: white;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    padding: 2rem;
-    box-shadow: 0 2px 16px rgba(127,119,221,0.07);
-  }
-
-  /* Upload zone */
-  .upload-zone {
-    border: 2px dashed #c5c1f5;
-    border-radius: 10px;
-    padding: 2.5rem 1.5rem;
-    text-align: center;
-    cursor: pointer;
-    transition: background 0.2s, border-color 0.2s;
-    position: relative;
-    background: var(--purple-light);
-  }
-
-  .upload-zone:hover, .upload-zone.drag-over {
-    border-color: var(--purple);
-    background: #e4e2fb;
-  }
-
-  .upload-zone input[type="file"] {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
-  }
-
-  .upload-icon {
-    font-size: 2.5rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .upload-zone h3 {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--purple-dark);
-    margin-bottom: 0.4rem;
-  }
-
-  .upload-zone p {
-    font-size: 0.83rem;
-    color: var(--text-muted);
-  }
-
-  .upload-zone .formats {
-    margin-top: 0.75rem;
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-
-  .format-tag {
-    background: white;
-    border: 1px solid #c5c1f5;
-    color: var(--purple);
-    font-size: 0.72rem;
-    font-weight: 500;
-    padding: 2px 8px;
-    border-radius: 20px;
-  }
-
-  /* Service selector */
-  .service-label {
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--text-muted);
-    margin: 1.25rem 0 0.6rem;
-    display: block;
-  }
-
-  .service-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 8px;
-    margin-bottom: 1.25rem;
-  }
-
-  .service-btn {
-    padding: 0.65rem 1rem;
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    background: white;
-    cursor: pointer;
-    font-size: 0.82rem;
-    font-weight: 500;
-    color: var(--text-muted);
-    transition: all 0.15s;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
-  }
-
+  main { max-width: 720px; margin: 3rem auto; padding: 0 1.5rem; }
+  .hero { text-align: center; margin-bottom: 2.5rem; }
+  .hero h2 { font-size: 2rem; font-weight: 800; color: var(--purple-dark); line-height: 1.2; margin-bottom: 0.75rem; }
+  .hero p { font-size: 1rem; color: var(--text-muted); }
+  .badge { display: inline-block; background: var(--teal-light); color: var(--teal); font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-bottom: 1rem; letter-spacing: 0.05em; text-transform: uppercase; }
+  .card { background: white; border-radius: var(--radius); border: 1px solid var(--border); padding: 2rem; box-shadow: 0 2px 16px rgba(127,119,221,0.07); }
+  .upload-zone { border: 2px dashed #c5c1f5; border-radius: 10px; padding: 2.5rem 1.5rem; text-align: center; cursor: pointer; transition: background 0.2s, border-color 0.2s; position: relative; background: var(--purple-light); }
+  .upload-zone:hover, .upload-zone.drag-over { border-color: var(--purple); background: #e4e2fb; }
+  .upload-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+  .upload-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+  .upload-zone h3 { font-size: 1.05rem; font-weight: 600; color: var(--purple-dark); margin-bottom: 0.4rem; }
+  .upload-zone p { font-size: 0.83rem; color: var(--text-muted); }
+  .upload-zone .formats { margin-top: 0.75rem; display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
+  .format-tag { background: white; border: 1px solid #c5c1f5; color: var(--purple); font-size: 0.72rem; font-weight: 500; padding: 2px 8px; border-radius: 20px; }
+  .service-label { font-size: 0.82rem; font-weight: 600; color: var(--text-muted); margin: 1.25rem 0 0.6rem; display: block; }
+  .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-bottom: 1.25rem; }
+  .service-btn { padding: 0.65rem 1rem; border: 1.5px solid var(--border); border-radius: 8px; background: white; cursor: pointer; font-size: 0.82rem; font-weight: 500; color: var(--text-muted); transition: all 0.15s; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
   .service-btn:hover { border-color: var(--purple); color: var(--purple); }
-
-  .service-btn.active {
-    border-color: var(--purple);
-    background: var(--purple-light);
-    color: var(--purple-dark);
-  }
-
+  .service-btn.active { border-color: var(--purple); background: var(--purple-light); color: var(--purple-dark); }
   .service-btn .svc-name { font-weight: 700; font-size: 0.88rem; }
   .service-btn .svc-limit { font-size: 0.7rem; color: #9a96d6; }
   .service-btn.active .svc-limit { color: var(--purple); }
-
-  /* Upload button */
-  .btn-upload {
-    width: 100%;
-    padding: 0.9rem;
-    background: var(--purple);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.15s, transform 0.1s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-  }
-
+  .btn-upload { width: 100%; padding: 0.9rem; background: var(--purple); color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.15s, transform 0.1s; display: flex; align-items: center; justify-content: center; gap: 8px; }
   .btn-upload:hover { background: var(--purple-dark); }
   .btn-upload:active { transform: scale(0.99); }
   .btn-upload:disabled { background: #b9b7e9; cursor: not-allowed; }
-
-  /* Progress */
-  .progress-wrap {
-    display: none;
-    margin-top: 1.25rem;
-  }
-
+  .progress-wrap { display: none; margin-top: 1.25rem; }
   .progress-wrap.show { display: block; }
-
-  .progress-info {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin-bottom: 6px;
-  }
-
-  .progress-bar-bg {
-    background: #e4e2fb;
-    border-radius: 20px;
-    height: 8px;
-    overflow: hidden;
-  }
-
-  .progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, var(--purple) 0%, var(--teal) 100%);
-    border-radius: 20px;
-    width: 0%;
-    transition: width 0.3s;
-  }
-
-  /* Result */
-  .result-box {
-    display: none;
-    margin-top: 1.5rem;
-    padding: 1.25rem;
-    background: var(--teal-light);
-    border-radius: 10px;
-    border: 1px solid #9FE1CB;
-  }
-
+  .progress-info { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; }
+  .progress-bar-bg { background: #e4e2fb; border-radius: 20px; height: 8px; overflow: hidden; }
+  .progress-bar { height: 100%; background: linear-gradient(90deg, var(--purple) 0%, var(--teal) 100%); border-radius: 20px; width: 0%; transition: width 0.3s; }
+  .result-box { display: none; margin-top: 1.5rem; padding: 1.25rem; background: var(--teal-light); border-radius: 10px; border: 1px solid #9FE1CB; }
   .result-box.show { display: block; }
-
-  .result-title {
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--teal);
-    margin-bottom: 0.6rem;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .url-row {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 0.5rem;
-  }
-
-  .url-row input {
-    flex: 1;
-    padding: 0.55rem 0.75rem;
-    border: 1px solid #9FE1CB;
-    border-radius: 6px;
-    font-size: 0.83rem;
-    background: white;
-    color: var(--text);
-    outline: none;
-  }
-
-  .url-row input:focus { border-color: var(--teal); }
-
-  .btn-copy {
-    padding: 0.55rem 1rem;
-    background: var(--teal);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.15s;
-    white-space: nowrap;
-  }
-
+  .result-title { font-size: 0.82rem; font-weight: 600; color: var(--teal); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 6px; }
+  .url-row { display: flex; gap: 8px; margin-bottom: 0.5rem; }
+  .url-row input { flex: 1; padding: 0.55rem 0.75rem; border: 1px solid #9FE1CB; border-radius: 6px; font-size: 0.83rem; background: white; color: var(--text); outline: none; }
+  .btn-copy { padding: 0.55rem 1rem; background: var(--teal); color: white; border: none; border-radius: 6px; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: background 0.15s; white-space: nowrap; }
   .btn-copy:hover { background: #0F6E56; }
-
-  .result-meta {
-    font-size: 0.75rem;
-    color: #0F6E56;
-  }
-
+  .result-meta { font-size: 0.75rem; color: #0F6E56; }
   .result-meta span { margin-right: 1rem; }
-
-  /* Error */
-  .error-box {
-    display: none;
-    margin-top: 1rem;
-    padding: 1rem;
-    background: #FCEBEB;
-    border: 1px solid #F7C1C1;
-    border-radius: 8px;
-    font-size: 0.83rem;
-    color: #A32D2D;
-  }
-
+  .error-box { display: none; margin-top: 1rem; padding: 1rem; background: #FCEBEB; border: 1px solid #F7C1C1; border-radius: 8px; font-size: 0.83rem; color: #A32D2D; line-height: 1.5; }
   .error-box.show { display: block; }
-
-  /* File preview */
-  .file-preview {
-    display: none;
-    margin: 1rem 0;
-    padding: 0.75rem 1rem;
-    background: white;
-    border: 1px solid #c5c1f5;
-    border-radius: 8px;
-    font-size: 0.83rem;
-    color: var(--text);
-    align-items: center;
-    gap: 10px;
-  }
-
+  .file-preview { display: none; margin: 1rem 0; padding: 0.75rem 1rem; background: white; border: 1px solid #c5c1f5; border-radius: 8px; font-size: 0.83rem; color: var(--text); align-items: center; gap: 10px; }
   .file-preview.show { display: flex; }
-
-  .file-icon {
-    font-size: 1.5rem;
-    flex-shrink: 0;
-  }
-
+  .file-icon { font-size: 1.5rem; flex-shrink: 0; }
   .file-info { flex: 1; min-width: 0; }
   .file-name { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .file-size { font-size: 0.75rem; color: var(--gray); margin-top: 2px; }
-
-  .btn-remove {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--gray);
-    font-size: 1.1rem;
-    padding: 2px 6px;
-    border-radius: 4px;
-  }
+  .btn-remove { background: none; border: none; cursor: pointer; color: var(--gray); font-size: 1.1rem; padding: 2px 6px; border-radius: 4px; }
   .btn-remove:hover { background: var(--gray-light); }
-
-  /* History */
-  .history-section {
-    margin-top: 2rem;
-  }
-
-  .history-title {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--text-muted);
-    margin-bottom: 0.75rem;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
+  .history-section { margin-top: 2rem; }
+  .history-title { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.75rem; }
   .history-list { list-style: none; }
-
-  .history-item {
-    display: flex;
-    align-items: center;
-    padding: 0.6rem 0.75rem;
-    border-radius: 7px;
-    gap: 10px;
-    font-size: 0.8rem;
-    border: 1px solid var(--border);
-    background: white;
-    margin-bottom: 6px;
-    transition: background 0.1s;
-  }
-
-  .history-item:hover { background: var(--gray-light); }
-
+  .history-item { display: flex; align-items: center; padding: 0.6rem 0.75rem; border-radius: 7px; gap: 10px; font-size: 0.8rem; border: 1px solid var(--border); background: white; margin-bottom: 6px; }
   .history-item .h-name { flex: 1; color: var(--text); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .history-item .h-url { color: var(--purple); text-decoration: none; font-size: 0.75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
   .history-item .h-url:hover { text-decoration: underline; }
   .history-item .h-time { color: var(--gray); font-size: 0.72rem; white-space: nowrap; }
-
-  .btn-copy-small {
-    background: none;
-    border: 1px solid #c5c1f5;
-    color: var(--purple);
-    font-size: 0.72rem;
-    padding: 2px 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    white-space: nowrap;
-  }
-
+  .btn-copy-small { background: none; border: 1px solid #c5c1f5; color: var(--purple); font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; cursor: pointer; white-space: nowrap; }
   .btn-copy-small:hover { background: var(--purple-light); }
-
-  .no-history {
-    text-align: center;
-    color: var(--gray);
-    font-size: 0.82rem;
-    padding: 1rem;
-  }
-
-  footer {
-    text-align: center;
-    padding: 2rem 1rem;
-    font-size: 0.75rem;
-    color: var(--gray);
-  }
+  .info-box { background: #fff8e1; border: 1px solid #ffe082; border-radius: 8px; padding: 0.75rem 1rem; font-size: 0.8rem; color: #7a5c00; margin-bottom: 1rem; line-height: 1.5; }
+  footer { text-align: center; padding: 2rem 1rem; font-size: 0.75rem; color: var(--gray); }
 </style>
 </head>
 <body>
@@ -451,7 +109,6 @@
   </div>
 
   <div class="card">
-    <!-- Upload zone -->
     <div class="upload-zone" id="dropZone">
       <input type="file" id="fileInput" accept="video/*">
       <div class="upload-icon">🎬</div>
@@ -468,7 +125,6 @@
       </div>
     </div>
 
-    <!-- File preview -->
     <div class="file-preview" id="filePreview">
       <div class="file-icon">🎥</div>
       <div class="file-info">
@@ -478,28 +134,22 @@
       <button class="btn-remove" id="removeFile" title="Hapus file">✕</button>
     </div>
 
-    <!-- Service selector -->
     <span class="service-label">Pilih layanan upload:</span>
     <div class="service-grid" id="serviceGrid">
-      <button class="service-btn active" data-service="fileio">
-        <span class="svc-name">file.io</span>
-        <span class="svc-limit">Hapus otomatis setelah didownload</span>
-      </button>
-      <button class="service-btn" data-service="0x0">
-        <span class="svc-name">0x0.st</span>
-        <span class="svc-limit">Simpan 30 hari</span>
-      </button>
-      <button class="service-btn" data-service="tmpfiles">
-        <span class="svc-name">tmpfiles.org</span>
-        <span class="svc-limit">Simpan 30 hari</span>
+      <button class="service-btn active" data-service="catbox">
+        <span class="svc-name">catbox.moe</span>
+        <span class="svc-limit">Permanen · maks 200MB</span>
       </button>
       <button class="service-btn" data-service="litterbox">
         <span class="svc-name">litterbox</span>
         <span class="svc-limit">1h / 12h / 24h / 72h</span>
       </button>
+      <button class="service-btn" data-service="uguu">
+        <span class="svc-name">uguu.se</span>
+        <span class="svc-limit">Simpan 48 jam</span>
+      </button>
     </div>
 
-    <!-- Litterbox time option -->
     <div id="litterboxTime" style="display:none; margin-bottom: 1rem;">
       <span class="service-label">Durasi simpan:</span>
       <select id="lbTime" style="width:100%; padding: 0.55rem 0.75rem; border: 1px solid var(--border); border-radius: 7px; font-size: 0.85rem; color: var(--text); background: white; outline: none;">
@@ -510,12 +160,14 @@
       </select>
     </div>
 
-    <!-- Upload button -->
+    <div class="info-box" id="infoBox">
+      ℹ️ <strong>catbox.moe</strong> — file disimpan permanen, bisa diputar langsung di browser. Cocok untuk video yang ingin dibagikan jangka panjang.
+    </div>
+
     <button class="btn-upload" id="uploadBtn" disabled>
       <span>⬆</span> Upload &amp; Generate Link
     </button>
 
-    <!-- Progress -->
     <div class="progress-wrap" id="progressWrap">
       <div class="progress-info">
         <span id="progressLabel">Mengupload...</span>
@@ -526,14 +178,10 @@
       </div>
     </div>
 
-    <!-- Error -->
     <div class="error-box" id="errorBox"></div>
 
-    <!-- Result -->
     <div class="result-box" id="resultBox">
-      <div class="result-title">
-        ✅ Link berhasil dibuat!
-      </div>
+      <div class="result-title">✅ Link berhasil dibuat!</div>
       <div class="url-row">
         <input type="text" id="resultUrl" readonly>
         <button class="btn-copy" id="copyBtn">Salin Link</button>
@@ -541,18 +189,15 @@
       <div class="result-meta" id="resultMeta"></div>
     </div>
 
-    <!-- History -->
     <div class="history-section" id="historySection" style="display:none;">
       <div class="history-title">🕑 Riwayat Upload Sesi Ini</div>
       <ul class="history-list" id="historyList"></ul>
     </div>
-
   </div>
-
 </main>
 
 <footer>
-  VideoLink menggunakan layanan pihak ketiga (file.io, 0x0.st, tmpfiles.org, litterbox). File Anda dikirim langsung ke layanan tersebut. Tidak ada data yang disimpan di server kami.
+  VideoLink menggunakan layanan pihak ketiga (catbox.moe, litterbox, uguu.se). File Anda dikirim langsung ke layanan tersebut tanpa melewati server kami.
 </footer>
 
 <script>
@@ -576,23 +221,26 @@ const historySection = document.getElementById('historySection');
 const historyList = document.getElementById('historyList');
 const serviceGrid = document.getElementById('serviceGrid');
 const litterboxTime = document.getElementById('litterboxTime');
+const infoBox = document.getElementById('infoBox');
 
 let selectedFile = null;
-let selectedService = 'fileio';
+let selectedService = 'catbox';
 let history = [];
+
+const serviceInfo = {
+  catbox: 'catbox.moe — file disimpan permanen, bisa diputar langsung di browser. Cocok untuk video jangka panjang.',
+  litterbox: 'litterbox — file sementara, otomatis terhapus sesuai durasi yang dipilih. Bagus untuk berbagi cepat.',
+  uguu: 'uguu.se — file disimpan 48 jam, tidak perlu akun. Simpel dan cepat.'
+};
 
 function formatSize(bytes) {
   if (bytes < 1024) return bytes + ' B';
   if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-  if (bytes < 1024 * 1024 * 1024) return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
-  return (bytes / (1024 * 1024 * 1024)).toFixed(2) + ' GB';
+  if (bytes < 1024 * 1024 * 1024) return (bytes / (1024*1024)).toFixed(1) + ' MB';
+  return (bytes / (1024*1024*1024)).toFixed(2) + ' GB';
 }
 
 function setFile(file) {
-  if (!file.type.startsWith('video/') && !file.name.match(/\.(mp4|mkv|avi|mov|webm|flv|wmv|m4v|3gp|ogv)$/i)) {
-    showError('File harus berupa video. Silakan pilih file video yang valid.');
-    return;
-  }
   selectedFile = file;
   fileNameEl.textContent = file.name;
   fileSizeEl.textContent = formatSize(file.size);
@@ -602,10 +250,7 @@ function setFile(file) {
   resultBox.classList.remove('show');
 }
 
-fileInput.addEventListener('change', e => {
-  if (e.target.files[0]) setFile(e.target.files[0]);
-});
-
+fileInput.addEventListener('change', e => { if (e.target.files[0]) setFile(e.target.files[0]); });
 dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
 dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
 dropZone.addEventListener('drop', e => {
@@ -624,83 +269,64 @@ removeFileBtn.addEventListener('click', () => {
   progressWrap.classList.remove('show');
 });
 
-// Service buttons
 serviceGrid.querySelectorAll('.service-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     serviceGrid.querySelectorAll('.service-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     selectedService = btn.dataset.service;
     litterboxTime.style.display = selectedService === 'litterbox' ? 'block' : 'none';
+    infoBox.innerHTML = 'ℹ️ ' + serviceInfo[selectedService];
   });
 });
 
-function showError(msg) {
-  errorBox.textContent = msg;
-  errorBox.classList.add('show');
-}
+function showError(msg) { errorBox.innerHTML = msg; errorBox.classList.add('show'); }
+function hideError() { errorBox.classList.remove('show'); }
 
-function hideError() {
-  errorBox.classList.remove('show');
-}
-
-uploadBtn.addEventListener('click', () => {
-  if (!selectedFile) return;
-  hideError();
-  resultBox.classList.remove('show');
-  doUpload();
-});
+uploadBtn.addEventListener('click', () => { if (selectedFile) doUpload(); });
 
 async function doUpload() {
   uploadBtn.disabled = true;
+  hideError();
+  resultBox.classList.remove('show');
   progressWrap.classList.add('show');
   progressBar.style.width = '0%';
   progressPct.textContent = '0%';
   progressLabel.textContent = 'Menyiapkan upload...';
 
-  const formData = new FormData();
-  let url, parseResult;
-
   try {
-    if (selectedService === 'fileio') {
-      formData.append('file', selectedFile);
-      const xhr = await xhrUpload('https://file.io/?expires=1d', formData);
-      const json = JSON.parse(xhr);
-      if (json.success && json.link) {
-        parseResult = { url: json.link, info: `Akan terhapus setelah 1x didownload • Ukuran: ${formatSize(selectedFile.size)}` };
-      } else {
-        throw new Error(json.message || 'Upload gagal di file.io');
-      }
+    let link = '';
 
-    } else if (selectedService === '0x0') {
-      formData.append('file', selectedFile);
-      const resp = await xhrUpload('https://0x0.st', formData);
-      const link = resp.trim();
-      if (link.startsWith('http')) {
-        parseResult = { url: link, info: `Simpan 30 hari • Ukuran: ${formatSize(selectedFile.size)}` };
-      } else {
-        throw new Error(resp || 'Upload gagal di 0x0.st');
-      }
-
-    } else if (selectedService === 'tmpfiles') {
-      formData.append('file', selectedFile);
-      const resp = await xhrUpload('https://tmpfiles.org/api/v1/upload', formData);
-      const json = JSON.parse(resp);
-      if (json.status === 'success' && json.data && json.data.url) {
-        parseResult = { url: json.data.url, info: `Simpan 30 hari • Ukuran: ${formatSize(selectedFile.size)}` };
-      } else {
-        throw new Error('Upload gagal di tmpfiles.org');
-      }
+    if (selectedService === 'catbox') {
+      // catbox.moe — support CORS, no login needed
+      const fd = new FormData();
+      fd.append('reqtype', 'fileupload');
+      fd.append('userhash', '');
+      fd.append('fileToUpload', selectedFile);
+      const resp = await xhrUpload('https://catbox.moe/user/api.php', fd);
+      link = resp.trim();
+      if (!link.startsWith('http')) throw new Error('Upload gagal: ' + resp);
 
     } else if (selectedService === 'litterbox') {
-      formData.append('reqtype', 'fileupload');
-      formData.append('time', document.getElementById('lbTime').value);
-      formData.append('fileToUpload', selectedFile);
-      const resp = await xhrUpload('https://litterbox.catbox.moe/resources/internals/api.php', formData);
-      const link = resp.trim();
-      if (link.startsWith('http')) {
-        parseResult = { url: link, info: `Simpan ${document.getElementById('lbTime').value} • Ukuran: ${formatSize(selectedFile.size)}` };
+      // litterbox.catbox.moe — support CORS
+      const fd = new FormData();
+      fd.append('reqtype', 'fileupload');
+      fd.append('time', document.getElementById('lbTime').value);
+      fd.append('fileToUpload', selectedFile);
+      const resp = await xhrUpload('https://litterbox.catbox.moe/resources/internals/api.php', fd);
+      link = resp.trim();
+      if (!link.startsWith('http')) throw new Error('Upload gagal: ' + resp);
+
+    } else if (selectedService === 'uguu') {
+      // uguu.se — support CORS
+      const fd = new FormData();
+      fd.append('files[]', selectedFile);
+      const resp = await xhrUpload('https://uguu.se/upload', fd);
+      let json;
+      try { json = JSON.parse(resp); } catch(e) { throw new Error('Response tidak valid dari uguu.se'); }
+      if (json && json.files && json.files[0] && json.files[0].url) {
+        link = json.files[0].url;
       } else {
-        throw new Error(resp || 'Upload gagal di litterbox');
+        throw new Error('Format respons uguu.se tidak dikenali. Coba layanan lain.');
       }
     }
 
@@ -708,19 +334,25 @@ async function doUpload() {
     progressPct.textContent = '100%';
     progressLabel.textContent = 'Selesai!';
 
-    resultUrl.value = parseResult.url;
-    resultMeta.innerHTML = `<span>📁 ${selectedFile.name}</span><span>${parseResult.info}</span>`;
+    resultUrl.value = link;
+    const svcLabels = { catbox: 'catbox.moe (permanen)', litterbox: 'litterbox (' + document.getElementById('lbTime').value + ')', uguu: 'uguu.se (48 jam)' };
+    resultMeta.innerHTML = `<span>📁 ${selectedFile.name}</span><span>☁️ ${svcLabels[selectedService]}</span><span>📦 ${formatSize(selectedFile.size)}</span>`;
     resultBox.classList.add('show');
+    addHistory(selectedFile.name, link);
 
-    addHistory(selectedFile.name, parseResult.url);
-
-  } catch (err) {
+  } catch(err) {
     progressWrap.classList.remove('show');
-    let msg = err.message || 'Terjadi kesalahan saat upload.';
-    if (msg.includes('Failed to fetch') || msg.includes('NetworkError') || msg.includes('CORS')) {
-      msg = `Upload ke ${selectedService} gagal karena batasan CORS browser. Coba layanan lain atau gunakan browser yang berbeda. Detail: ${msg}`;
+    let msg = err.message || 'Terjadi kesalahan.';
+    if (msg.toLowerCase().includes('failed to fetch') || msg.toLowerCase().includes('network') || msg.toLowerCase().includes('cors')) {
+      msg = `⚠️ Koneksi ke layanan <b>${selectedService}</b> gagal karena blokir CORS atau masalah jaringan.<br><br>
+      💡 <b>Solusi:</b><br>
+      • Coba layanan lain (catbox / litterbox / uguu)<br>
+      • Pastikan koneksi internet stabil<br>
+      • Buka file ini di browser Chrome atau Firefox terbaru`;
+    } else {
+      msg = '⚠️ ' + msg;
     }
-    showError('⚠️ ' + msg);
+    showError(msg);
   } finally {
     uploadBtn.disabled = false;
   }
@@ -730,7 +362,6 @@ function xhrUpload(url, formData) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', url);
-
     xhr.upload.onprogress = e => {
       if (e.lengthComputable) {
         const pct = Math.round((e.loaded / e.total) * 95);
@@ -739,19 +370,12 @@ function xhrUpload(url, formData) {
         progressLabel.textContent = `Mengupload... ${formatSize(e.loaded)} / ${formatSize(e.total)}`;
       }
     };
-
     xhr.onload = () => {
-      if (xhr.status >= 200 && xhr.status < 300) {
-        resolve(xhr.responseText);
-      } else {
-        reject(new Error(`Server mengembalikan status ${xhr.status}: ${xhr.responseText}`));
-      }
+      if (xhr.status >= 200 && xhr.status < 300) resolve(xhr.responseText);
+      else reject(new Error(`Server error ${xhr.status}: ${xhr.responseText.substring(0, 200)}`));
     };
-
-    xhr.onerror = () => reject(new Error('Koneksi gagal. Periksa internet Anda atau coba layanan lain.'));
-    xhr.ontimeout = () => reject(new Error('Upload timeout. File mungkin terlalu besar untuk koneksi Anda.'));
+    xhr.onerror = () => reject(new Error('Failed to fetch — koneksi gagal atau CORS diblokir'));
     xhr.timeout = 0;
-
     xhr.send(formData);
   });
 }
@@ -778,19 +402,10 @@ function addHistory(name, url) {
 
 function renderHistory() {
   historyList.innerHTML = '';
-  if (history.length === 0) {
-    historyList.innerHTML = '<div class="no-history">Belum ada upload dalam sesi ini</div>';
-    return;
-  }
   history.forEach(item => {
     const li = document.createElement('li');
     li.className = 'history-item';
-    li.innerHTML = `
-      <span class="h-name" title="${item.name}">🎬 ${item.name}</span>
-      <a class="h-url" href="${item.url}" target="_blank" title="${item.url}">${item.url}</a>
-      <span class="h-time">${item.time}</span>
-      <button class="btn-copy-small" onclick="copyHistoryUrl('${item.url}', this)">Salin</button>
-    `;
+    li.innerHTML = `<span class="h-name" title="${item.name}">🎬 ${item.name}</span><a class="h-url" href="${item.url}" target="_blank">${item.url}</a><span class="h-time">${item.time}</span><button class="btn-copy-small" onclick="copyHistoryUrl('${item.url}', this)">Salin</button>`;
     historyList.appendChild(li);
   });
 }
